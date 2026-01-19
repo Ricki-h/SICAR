@@ -82,6 +82,4 @@ Fora do escopo, possuimos:
 * Victor Hugo
 * Pedro Vinícios
 
----
 
-se quiser, posso deixar **ainda mais coquette** com emojis suaves 🌸 ou transformar isso num **README padrão de projeto** 💻💖
