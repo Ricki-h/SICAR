@@ -7,8 +7,8 @@ import { ref } from 'vue'
   <!-- OUVIDORIA -->
    <div class="flex flex-col gap-12 w-304 m-auto">
         <div class="flex flex-col items-center gap-3">
-            <h1 class="text-4xl">OUVIDORIA</h1>
-            <p>Aqui te ouvimos independentemente do que tem a dizer</p>
+            <h1 class="text-4xl text-orange-600 font-bold font-sans">OUVIDORIA</h1>
+            <p class="font-[Rubik]">Aqui te ouvimos independentemente do que tem a dizer</p>
         </div>
 
         <div class="flex flex-row items-center justify-evenly">
