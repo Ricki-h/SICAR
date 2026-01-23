@@ -1,0 +1,39 @@
+@theme {
+    --color-bg: rgb(var(--bg));
+    --color-text: rgb(var(--text));
+    --color-title: rgb(var(--title));
+    --color-heading: rgb(var(--heading));
+    --color-clarinho: rgb(var(--clarinho));
+    --color-button: rgb(var(--button));
+    --color-btn-text: rgb(var(--btntext));
+    --color-btn-hover: rgb(var(--btnhover));
+    --color-bg-blue: rgb(var(--bgblue));
+    --color-shadow: rgb(var(--shadow));
+    --color-bg-blue-hover: rgb(var(--bgbluehover));
+    --color-black-blue: rgb(var(--blackblue));
+
+    /* cores padrões */
+    --color-orange-50: rgb(255 248 236);
+    --color-orange-100: rgb(255 240 211);
+    --color-orange-200: rgb(255 222 165);
+    --color-orange-300: rgb(255 197 109);
+    --color-orange-400: rgb(255 160 50);
+    --color-orange-500: rgb(255 131 10);
+    --color-orange-600: rgb(253 105 0);
+    --color-orange-700: rgb(204 76 2);
+    --color-orange-800: rgb(161 59 11);
+    --color-orange-900: rgb(130 51 12);
+    --color-orange-950: rgb(70 23 4);
+
+    --color-blue-50: rgb(238 246 255);
+    --color-blue-100: rgb(217 235 255);
+    --color-blue-200: rgb(188 220 255);
+    --color-blue-300: rgb(142 199 255);
+    --color-blue-400: rgb(89 167 255);
+    --color-blue-500: rgb(64 140 255);
+    --color-blue-600: rgb(27 99 245);
+    --color-blue-700: rgb(20 78 225);
+    --color-blue-800: rgb(23 63 182);
+    --color-blue-900: rgb(25 57 143);
+    --color-blue-950: rgb(20 36 87);
+}

@@ -1,0 +1,35 @@
+@layer components {
+    .ui-base {
+        @apply flex items-center justify-center transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+
+    .ui-rounded {
+        @apply rounded-full;
+    }
+    .ui-squared {
+        @apply rounded-none;
+    }
+
+    .ui-solid-orange {
+        @apply bg-orange-600 text-white hover:bg-orange-500;
+    }
+    .ui-outline-orange {
+        @apply border border-orange-600 text-orange-600 hover:bg-orange-500 hover:text-orange-500;
+    }
+    .ui-solid-blue {
+        @apply bg-blue-600 text-white hover:bg-blue-500;
+    }
+    .ui-outline-blue {
+        @apply border border-blue-600 text-blue-600 hover:bg-blue-500 hover:text-blue-500;
+    }
+    .ui-solid-neutral {
+        @apply bg-button text-btn-text hover:bg-btn-hover;
+    }
+    .ui-outline-neutral {
+        @apply border border-button text-button hover:bg-btn-hover hover:text-btn-hover;
+    }
+
+    .ui-md {
+        @apply px-4 py-2.5;
+    }
+}   
