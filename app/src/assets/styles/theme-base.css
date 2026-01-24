@@ -36,4 +36,8 @@
     --color-blue-800: rgb(23 63 182);
     --color-blue-900: rgb(25 57 143);
     --color-blue-950: rgb(20 36 87);
+
+    /* Tipografia */
+    --font-title: 'Figtree', system-ui, sans-serif;
+    --font-text: 'Rubik', system-ui, sans-serif;
 }

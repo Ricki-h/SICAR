@@ -1,11 +1,7 @@
 <script setup>
-  import BaseButton from './components/BaseButton.vue'
+  import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <BaseButton color="neutral">ENTRAR</BaseButton>
+  <RouterView  />
 </template>
-
-<style scoped>
-
-</style>
