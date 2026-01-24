@@ -5,9 +5,8 @@ import TheOuvidoria from './components/TheOuvidoria.vue'
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto p-4 md:p-0">
-    <div class="max-w-5xl mx-auto flex flex-col gap-10 items-center">
-    <!-- <div class="max-w-5xl mx-auto flex flex-col gap-12 items-center"></div> -->
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-5xl mx-auto flex flex-col gap-10 max-sm:px-8 items-center">
       <TheOuvidoria class="flex flex-col gap-3 md:items-center">
           <template #title>
             OUVIDORIA
@@ -18,8 +17,7 @@ import TheOuvidoria from './components/TheOuvidoria.vue'
           </template>
       </TheOuvidoria>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-      <!-- class="flex flex-col sm:flex-row items-center gap-[10px] md:justify-evenly" -->
+      <div class="p-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
 
         <CardOuvidoria>
           <template #imagem>
@@ -65,11 +63,6 @@ import TheOuvidoria from './components/TheOuvidoria.vue'
     </div>
   </div>
 
-  <TheDropdown>
-    <template #dropdown>
-      <img src="./assets/banner-arca-original.jpg" alt="Banner Arca">
-    </template>
-  </TheDropdown>
 
 </template>
 
