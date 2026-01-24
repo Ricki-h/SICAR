@@ -1,12 +1,14 @@
 <script setup>
 import CardOuvidoria from './components/CardOuvidoria.vue'
-import TheOuvidoria from './components/TheOuvidoria.vue';
+import TheDropdown from './components/TheDropdown.vue'
+import TheOuvidoria from './components/TheOuvidoria.vue'
 </script>
 
 <template>
   <div class="max-w-7xl mx-auto p-4 md:p-0">
-    <div class="max-w-5xl mx-auto flex flex-col gap-12">
-      <TheOuvidoria>
+    <div class="max-w-5xl mx-auto flex flex-col gap-10 items-center">
+    <!-- <div class="max-w-5xl mx-auto flex flex-col gap-12 items-center"></div> -->
+      <TheOuvidoria class="flex flex-col gap-3 md:items-center">
           <template #title>
             OUVIDORIA
           </template>
@@ -16,7 +18,8 @@ import TheOuvidoria from './components/TheOuvidoria.vue';
           </template>
       </TheOuvidoria>
 
-      <div class="flex flex-col md:flex-row items-center gap-[10px] md:justify-evenly">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <!-- class="flex flex-col sm:flex-row items-center gap-[10px] md:justify-evenly" -->
 
         <CardOuvidoria>
           <template #imagem>
@@ -60,8 +63,13 @@ import TheOuvidoria from './components/TheOuvidoria.vue';
         
       </div>
     </div>
-
   </div>
+
+  <TheDropdown>
+    <template #dropdown>
+      <img src="./assets/banner-arca-original.jpg" alt="Banner Arca">
+    </template>
+  </TheDropdown>
 
 </template>
 

@@ -8,7 +8,7 @@ const colorClasses = {
 }
 
 const sizeClasses = {
-    tam_70: 'w-[280px] h-[280px]',
+    tam_70: 'w-full max-w-[280px] aspect-square',
     sm: 'w-48 h-48',
     md: 'w-64 h-64',
     lg: 'w-72 h-72'
@@ -20,7 +20,7 @@ const props = defineProps({
 });
 
 const classes = computed(() => [
-    'flex flex-col justify-center items-center gap-2 rounded-sm shadow-md',
+    'flex flex-col justify-center items-center gap-2 rounded-sm shadow-md mx-auto',
     colorClasses[props.color] ?? colorClasses.blue,
     sizeClasses[props.size] ?? sizeClasses.tam_70,
     'delay-150 duration-300 ease-in-out'
