@@ -13,7 +13,7 @@ const open = ref(false)
 </script>
 
 <template>
-    <div class="flex items-center justify-between md:px-12 px-6 py-6">
+    <div class="flex items-center justify-between sm:px-12 px-6 py-6">
         <BaseLogo/>
 
         <div class="flex gap-2 items-center">
@@ -60,7 +60,7 @@ const open = ref(false)
                     <summary class="p-4 text-title font-text font-medium text-sm hover:cursor-pointer hover:bg-bg-blue trasition duration-300">Funcionalidades</summary>
                     <ul class="flex flex-col px-4 w-full">
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Cursos</BaseLink></li>
-                        <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Serviços</BaseLink></li>
+                        <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" to="/services">Serviços</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Auxílios</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >ONGs</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Oportunidades</BaseLink></li>

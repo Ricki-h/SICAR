@@ -15,7 +15,7 @@ const auth = useAuthStore()
     <div class="ui-container-xl flex items-center justify-between py-6 px-28">
         <BaseLogo/>
 
-        <nav class="flex items-center gap-4">
+        <nav class="flex items-center gap-3">
             <ThemeToggle />
 
             <BaseLink>Ouvidoria</BaseLink>
@@ -25,16 +25,16 @@ const auth = useAuthStore()
 
             <BaseDropDown label="Funcionalidades">
                 <li><BaseLink color="text">Cursos</BaseLink></li>
-                <li><BaseLink color="text">Serviços</BaseLink></li>
+                <li><BaseLink color="text" to="/services">Serviços</BaseLink></li>
                 <li><BaseLink color="text">Auxílios</BaseLink></li>
                 <li><BaseLink color="text">ONGs</BaseLink></li>
                 <li><BaseLink color="text">Empresas</BaseLink></li>
                 <li><BaseLink color="text">Fazer Denúncia</BaseLink></li>
             </BaseDropDown>
 
-            <div v-if="!auth.isAuthenticated" class="flex items-center gap-4">
+            <div v-if="!auth.isAuthenticated" class="flex items-center gap-2">
                 <BaseButton color="orange" to="/login/comum">Entrar</BaseButton>
-                <BaseButton color="orange" variant="outline">Cadastrar-se</BaseButton>
+                <BaseButton color="orange" variant="outline" to="/cadastro/comum">Cadastrar-se</BaseButton>
             </div>
             <UserMenu v-else />
         </nav>

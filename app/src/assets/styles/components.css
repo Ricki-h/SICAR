@@ -31,6 +31,9 @@
     .ui-md {
         @apply px-4 py-2.5;
     }
+    .ui-sm {
+        @apply px-4 py-1 text-xs;
+    }
 
 
     /* toggle */
