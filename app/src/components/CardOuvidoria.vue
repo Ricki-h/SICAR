@@ -8,7 +8,6 @@ const colorClasses = {
 }
 
 const sizeClasses = {
-    // tam_70: 'w-full max-w-[280px] aspect-square',
     tam_70: 'w-full max-w-[280px] aspect-square',
     tam_tablet: 'w-full max-w-[321px] h-[280px]',
     tam_cell: 'w-full max-w-[325px] h-[280px]',
@@ -26,13 +25,13 @@ const classes = computed(() => [
     'flex flex-col justify-center items-center gap-2 rounded-sm shadow-md mx-auto p-4',
     colorClasses[props.color] ?? colorClasses.blue,
     sizeClasses[props.size] ?? sizeClasses.tam_70,
-    'delay-150 duration-300 ease-in-out'
+    'delay-150 duration-300 ease-in-out md:tam_70 sm:tam_tablet tam_cell'
 ]);
 
 </script>
 
 <template>    
-    <div :class="classes" class="tam_cell sm:tam_tablet md:tam_70">
+    <div :class="classes">
         <slot name="imagem" />
         <slot name="title" />
     </div>

@@ -1,14 +1,14 @@
 <script setup>
 import CardOuvidoria from './components/CardOuvidoria.vue'
-import TheDropdown from './components/TheDropdown.vue'
+// import TheDropdown from './components/TheDropdown.vue'
 import TheOuvidoria from './components/TheOuvidoria.vue'
 </script>
 
 <template>
   <div class="max-w-7xl mx-auto">
-    <div class="max-w-5xl mx-auto flex flex-col gap-10 max-sm:px-8 items-center">
-      <TheOuvidoria class="flex flex-col gap-3 md:items-center">
-          <template #title>
+    <div class="max-w-6xl flex flex-col gap-10 mx-auto p-4 md:px-0">
+      <TheOuvidoria class="flex flex-col gap-3 items-start md:items-center">
+          <template #title> 
             OUVIDORIA
           </template>
 
@@ -17,8 +17,7 @@ import TheOuvidoria from './components/TheOuvidoria.vue'
           </template>
       </TheOuvidoria>
 
-      <div class="p-0 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <CardOuvidoria>
           <template #imagem>
             <img src="./assets/mega-phone.svg"></img>
