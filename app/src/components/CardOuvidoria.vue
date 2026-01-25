@@ -9,8 +9,9 @@ const colorClasses = {
 
 const sizeClasses = {
     // tam_70: 'w-full max-w-[280px] aspect-square',
-    tam_70: 'w-full  max-sm:max-w-[325px] max-w-[280px] aspect-square',
-    tam_cell: 'w-full aspect-square',
+    tam_70: 'w-full max-w-[280px] aspect-square',
+    tam_tablet: 'w-full max-w-[321px] h-[280px]',
+    tam_cell: 'w-full max-w-[325px] h-[280px]',
     sm: 'w-48 h-48',
     md: 'w-64 h-64',
     lg: 'w-72 h-72'
@@ -31,7 +32,7 @@ const classes = computed(() => [
 </script>
 
 <template>    
-    <div :class="classes" class="max-sm: tam_70">
+    <div :class="classes" class="tam_cell sm:tam_tablet md:tam_70">
         <slot name="imagem" />
         <slot name="title" />
     </div>
