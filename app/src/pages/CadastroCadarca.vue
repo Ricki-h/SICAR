@@ -1,60 +1,98 @@
 <script setup>
-    import { ref, watch } from 'vue';
-    import { useRouter } from 'vue-router';
-    import { useAuthStore } from '../stores/auth'
-    import api from '../services/api'
-    import BaseButton from '../components/ui/BaseButton.vue';
-    import GeometricDraw from '../components/ui/login/GeometricDraw.vue';
-    import BaseLink from '../components/ui/BaseLink.vue';
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import api from '../services/api'
+import BaseButton from '../components/ui/BaseButton.vue'
+import GeometricDraw from '../components/ui/login/GeometricDraw.vue'
+import BaseLink from '../components/ui/BaseLink.vue'
 
-    const cadarca = ref('');
-    const onlyNumbers = (v) => v.replace(/\D/g, '')
+const router = useRouter()
 
-    const formatCadarca = (v) => {
-        const numbers = onlyNumbers(v).slice(0, 11)
+const cadarca = ref('')
+const nome = ref('')
+const nascimento = ref('')
+const senha = ref('')
+const showPassword = ref(false)
+const togglePassword = () => {
+    showPassword.value = !showPassword.value
+}
+const confirmarSenha = ref('')
 
-        return numbers
-    }
-    watch(cadarca, (value) => {
-        cadarca.value = formatCadarca(value)
+const loading = ref(false)
+const error = ref(null)
+
+const cadarcaError = ref(null)
+const nomeError = ref(null)
+const nascimentoError = ref(null)
+const senhaError = ref(null)
+const confirmarSenhaError = ref(null)
+
+const onlyNumbers = (v) => v.replace(/\D/g, '')
+
+const formatCadarca = (v) => {
+  const numbers = onlyNumbers(v).slice(0, 11)
+
+  return numbers
+}
+
+watch(cadarca, (v) => {
+  cadarca.value = formatCadarca(v)
+})
+
+const submit = async () => {
+  error.value = null
+  cadarcaError.value = nomeError.value = nascimentoError.value = senhaError.value = confirmarSenhaError.value = null
+  loading.value = true
+
+  const cadarcaNumeros = onlyNumbers(cadarca.value)
+
+  if (!cadarcaNumeros) cadarcaError.value = 'cadarca é obrigatório'
+  else if (!cadarcaValido(cadarcaNumeros)) cadarcaError.value = 'cadarca inválido'
+
+  if (!nome.value) nomeError.value = 'Nome completo é obrigatório'
+  if (!nascimento.value) nascimentoError.value = 'Data de nascimento é obrigatória'
+  if (!senha.value) senhaError.value = 'Senha é obrigatória'
+  if (!confirmarSenha.value) confirmarSenhaError.value = 'Confirme a senha'
+  else if (senha.value !== confirmarSenha.value)
+    confirmarSenhaError.value = 'As senhas não coincidem'
+
+  if (
+    cadarcaError.value ||
+    nomeError.value ||
+    nascimentoError.value ||
+    senhaError.value ||
+    confirmarSenhaError.value
+  ) {
+    loading.value = false
+    return
+  }
+
+    
+
+
+  try {
+    await api.post('/usuarios/create', {
+        cadarca: cadarcaNumeros,
+        nome: nome.value,
+        data_nasc: nascimento.value,
+        senha: senha.value,
+        tipo: 'comum'
     })
-    const senha = ref('');
-    const showPassword = ref(false)
-    const togglePassword = () => {
-        showPassword.value = !showPassword.value
-    }
-    const loading = ref(false);
-    const error = ref(null);
 
-    const auth  = useAuthStore()
-    const router = useRouter()
+    router.push({ name: 'confirmacao', query: { type: 'cadastro' } })
 
-    const submit = async() => {
-        error.value = null;
-        loading.value = true;
-
-        try {
-            const { data } = await api.post('/usuarios/login/cadarca', {
-                cadarca: cadarca.value,
-                senha: senha.value,
-            });
-
-            auth.setToken(data.token)
-
-            await auth.fetchUser()
-
-            router.push('/')
-        } catch (e) {
-            error.value = 'CadARCA ou senha inválidos'
-        } finally {
-            loading.value = false
-        }
-    }
+  } catch (e) {
+    error.value = 'Erro ao realizar cadastro'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
+
 
 <template>
     <main class="bg-bg ui-container-xl relative overflow-y-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" width="797" height="980" viewBox="0 0 797 980" fill="currentColor" class="fill-clarinho absolute z-0 right-0 lg:top-5 top-[-500px]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="797" height="980" viewBox="0 0 797 980" fill="currentColor" class="fill-clarinho absolute z-0 left-0 lg:top-5 top-[-500px]">
             <path d="M2.04545 4.09091C1.48485 4.09091 1.00379 3.89015 0.602273 3.48864C0.200758 3.08712 0 2.60606 0 2.04545C0 1.48485 0.200758 1.00379 0.602273 0.602273C1.00379 0.200758 1.48485 0 2.04545 0C2.60606 0 3.08712 0.200758 3.48864 0.602273C3.89015 1.00379 4.09091 1.48485 4.09091 2.04545C4.09091 2.41667 3.99621 2.75758 3.80682 3.06818C3.625 3.37879 3.37879 3.62879 3.06818 3.81818C2.76515 4 2.42424 4.09091 2.04545 4.09091Z"/>
             <path d="M46.058 4.09091C45.4974 4.09091 45.0163 3.89015 44.6148 3.48864C44.2133 3.08712 44.0125 2.60606 44.0125 2.04545C44.0125 1.48485 44.2133 1.00379 44.6148 0.602273C45.0163 0.200758 45.4974 0 46.058 0C46.6186 0 47.0996 0.200758 47.5011 0.602273C47.9027 1.00379 48.1034 1.48485 48.1034 2.04545C48.1034 2.41667 48.0087 2.75758 47.8193 3.06818C47.6375 3.37879 47.3913 3.62879 47.0807 3.81818C46.7777 4 46.4367 4.09091 46.058 4.09091Z"/>
             <path d="M90.0705 4.09091C89.5099 4.09091 89.0288 3.89015 88.6273 3.48864C88.2258 3.08712 88.025 2.60606 88.025 2.04545C88.025 1.48485 88.2258 1.00379 88.6273 0.602273C89.0288 0.200758 89.5099 0 90.0705 0C90.6311 0 91.1121 0.200758 91.5136 0.602273C91.9152 1.00379 92.1159 1.48485 92.1159 2.04545C92.1159 2.41667 92.0212 2.75758 91.8318 3.06818C91.65 3.37879 91.4038 3.62879 91.0932 3.81818C90.7902 4 90.4492 4.09091 90.0705 4.09091Z"/>
@@ -559,7 +597,7 @@
                     Voltar
                 </BaseLink>
     
-                <BaseLink class="font-text group flex flex-col gap-2 items-center" size="sm" to="/login/comum">
+                <BaseLink class="font-text group flex flex-col gap-2 items-center" size="sm" to="/cadastro/comum">
                     <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
                         <path d="M56 28C56 43.464 43.464 56 28 56C12.536 56 0 43.464 0 28C0 12.536 12.536 0 28 0C43.464 0 56 12.536 56 28Z" fill="#7ECF00"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.94439 39.6861C9.63738 40.7935 10.6934 41.7486 11.7866 41.3945L28.6946 35.918C29.7152 35.5874 30.7421 36.4064 30.6467 37.475L30.2184 42.2757C30.1418 43.1351 30.8055 43.8811 31.6679 43.905L45.5908 44.2906C46.4334 44.3139 47.1294 43.6393 46.9994 42.8065C45.9064 35.8074 38.038 22.5313 28.3326 11.0989C28.5867 8.62032 29.685 6.27461 29.8745 4.6665C25.309 9.11136 13.7151 26.085 9.94439 39.6861ZM27.9405 32.5404C32.4028 33.0764 32.2923 25.6701 28.3326 11.0989C25.4348 24.4998 23.6808 31.4683 27.9405 32.5404Z" fill="#408CFF"/>
@@ -568,20 +606,20 @@
                 </BaseLink>
             </div>
         
-            <div class="z-2 relative flex md:justify-between items-center flex-col-reverse lg:flex-row gap-10">
+            <div class="z-2 relative flex md:justify-between items-center flex-col-reverse lg:flex-row-reverse gap-10">
                 <form @submit.prevent="submit" class="rounded-xl flex flex-col gap-7 flex-none w-full lg:w-auto">
                     <div class="text-title sm:text-[28px] text-xl font-medium flex gap-2 items-center">
                         <span>Entre no</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="89" height="23" viewBox="0 0 89 23" fill="none" class="w-16 sm:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="89" height="23" viewBox="0 0 89 23" fill="none" class="w-18 sm:w-auto">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M50.3568 19.5938C50.1903 20.1942 50.7628 20.712 51.3555 20.52L60.5218 17.551C61.0752 17.3718 61.6318 17.8158 61.5802 18.3951L61.348 20.9977C61.3064 21.4636 61.6662 21.8681 62.1338 21.881L69.6818 22.0901C70.1386 22.1027 70.5159 21.737 70.4454 21.2855C69.8529 17.4911 65.5872 10.2937 60.3256 4.09584C60.4634 2.75211 61.0588 1.48042 61.1615 0.608619C58.6864 3.01832 52.401 12.2202 50.3568 19.5938ZM60.113 15.7199C62.5322 16.0105 62.4723 11.9953 60.3256 4.09584C58.7546 11.3609 57.8037 15.1387 60.113 15.7199Z" fill="#FD5400"/>
                             <path d="M73.1207 21.6151C72.8966 21.6151 72.7149 21.4334 72.7149 21.2093V0.52776C72.7149 0.303673 72.8966 0.122013 73.1207 0.122013H80.6981C82.2128 0.122013 83.5536 0.418823 84.7203 1.01244C85.8871 1.60606 86.798 2.42484 87.453 3.46879C88.1081 4.49227 88.4356 5.68974 88.4356 7.0612C88.4356 8.41219 88.0876 9.6199 87.3916 10.6843C86.7161 11.7283 85.7848 12.5471 84.5975 13.1407C83.4103 13.7138 82.0593 14.0004 80.5446 14.0004H77.3272C77.1031 14.0004 76.9214 14.182 76.9214 14.4061V21.2093C76.9214 21.4334 76.7398 21.6151 76.5157 21.6151H73.1207ZM84.7705 21.6151C84.6255 21.6151 84.4915 21.5376 84.419 21.412L79.7458 13.306C79.6416 13.1251 79.6916 12.8946 79.8615 12.7732L82.4271 10.9406C82.6203 10.8027 82.8901 10.8592 83.0116 11.0632L88.9301 21.0017C89.0911 21.2722 88.8962 21.6151 88.5814 21.6151H84.7705ZM76.9214 9.7566C76.9214 9.98069 77.1031 10.1623 77.3272 10.1623H80.7288C81.3633 10.1623 81.9262 10.0293 82.4175 9.76319C82.9293 9.49708 83.3284 9.12863 83.615 8.65783C83.922 8.18703 84.0756 7.65482 84.0756 7.0612C84.0756 6.14007 83.7378 5.39293 83.0623 4.81978C82.4073 4.24663 81.5578 3.96006 80.5138 3.96006H77.3272C77.1031 3.96006 76.9214 4.14172 76.9214 4.36581V9.7566Z" fill="#FD5400"/>
                             <path d="M38.038 21.6055C35.9463 21.6055 34.0905 21.1497 32.4704 20.238C30.8504 19.3065 29.579 18.0381 28.6562 16.4328C27.7334 14.8076 27.272 12.9446 27.272 10.8438C27.272 8.74302 27.7334 6.88995 28.6562 5.28462C29.579 3.65947 30.8402 2.39106 32.4397 1.47939C34.0597 0.547904 35.9156 0.0821596 38.0072 0.0821596C39.4837 0.0821596 40.8577 0.339805 42.1291 0.855096C43.4005 1.35057 44.5078 2.05414 45.4511 2.96581C46.3052 3.75606 46.9821 4.65524 47.4819 5.66334C47.5864 5.87407 47.4777 6.12486 47.2562 6.20408L44.1049 7.33121C43.9087 7.40137 43.6925 7.3108 43.5929 7.1278C43.2681 6.53129 42.8622 6.00608 42.3751 5.55218C41.801 4.99725 41.1447 4.57114 40.4065 4.27386C39.6683 3.95675 38.8685 3.7982 38.0072 3.7982C36.7563 3.7982 35.6387 4.1054 34.6544 4.71978C33.6906 5.31435 32.9318 6.13683 32.3782 7.18724C31.845 8.23764 31.5784 9.4565 31.5784 10.8438C31.5784 12.2311 31.8552 13.4599 32.4089 14.5301C32.9626 15.5805 33.7316 16.4129 34.7159 17.0273C35.7002 17.6219 36.8281 17.9192 38.0995 17.9192C38.9813 17.9192 39.7811 17.7606 40.4988 17.4435C41.237 17.1066 41.883 16.6508 42.4367 16.076C42.9254 15.5868 43.3325 15.0329 43.6578 14.4144C43.7551 14.2295 43.9713 14.1369 44.1684 14.2059L47.319 15.3087C47.5401 15.3862 47.6506 15.6348 47.5497 15.8463C47.0493 16.8948 46.3703 17.8335 45.5127 18.6624C44.5694 19.5939 43.462 20.3173 42.1906 20.8326C40.9192 21.3478 39.535 21.6055 38.038 21.6055Z" fill="#FD5400"/>
                             <path d="M20.0777 21.6151C19.8536 21.6151 19.672 21.4334 19.672 21.2093V0.52776C19.672 0.303673 19.8536 0.122013 20.0777 0.122013H23.4727C23.6968 0.122013 23.8785 0.303672 23.8785 0.527759V21.2093C23.8785 21.4334 23.6968 21.6151 23.4727 21.6151H20.0777Z" fill="#FD5400"/>
                             <path d="M8.25391 21.6055C7.1668 21.6055 6.15148 21.4762 5.20795 21.2175C4.26442 20.9589 3.42345 20.6008 2.68504 20.1432C1.94662 19.6658 1.33128 19.1386 0.839002 18.5616C0.458967 18.0968 0.185415 17.6127 0.0183485 17.1092C-0.0492477 16.9055 0.0768438 16.6947 0.283014 16.635L3.68396 15.6503C3.88508 15.5921 4.0953 15.6978 4.19193 15.8836C4.47113 16.4202 4.89185 16.8951 5.45409 17.3083C6.13097 17.7857 6.9822 18.0344 8.00777 18.0543C9.09488 18.0742 9.97687 17.8454 10.6538 17.3679C11.3511 16.8905 11.6998 16.2737 11.6998 15.5177C11.6998 14.8612 11.4229 14.3141 10.8691 13.8764C10.3358 13.4189 9.59741 13.0707 8.65388 12.832L5.85406 12.1158C4.80798 11.8571 3.88496 11.4692 3.08501 10.9519C2.28506 10.4148 1.65946 9.75827 1.20821 8.98239C0.756956 8.2065 0.53133 7.3013 0.53133 6.26678C0.53133 4.29722 1.19795 2.76534 2.5312 1.67114C3.88496 0.557047 5.79253 0 8.25391 0C9.62818 0 10.8281 0.198945 11.8537 0.596836C12.8998 0.974832 13.7715 1.52193 14.4689 2.23814C15.0683 2.85371 15.5465 3.56481 15.9034 4.37144C15.9987 4.5868 15.8768 4.83208 15.6512 4.89955L12.3434 5.88857C12.1375 5.95013 11.9217 5.83906 11.8259 5.64669C11.5636 5.11969 11.1626 4.65992 10.623 4.26738C9.96662 3.78991 9.1359 3.55117 8.13084 3.55117C7.10526 3.55117 6.29506 3.77996 5.70023 4.23754C5.1259 4.69511 4.83874 5.34168 4.83874 6.17726C4.83874 6.83378 5.06437 7.35103 5.51562 7.72903C5.98739 8.10703 6.62324 8.3955 7.42319 8.59444L10.2538 9.28081C12.0998 9.71849 13.5356 10.5043 14.5612 11.6383C15.5868 12.7723 16.0996 14.0356 16.0996 15.4282C16.0996 16.6617 15.7919 17.7459 15.1765 18.681C14.5612 19.5961 13.6689 20.3123 12.4998 20.8296C11.3306 21.3468 9.91534 21.6055 8.25391 21.6055Z" fill="#FD5400"/>
                         </svg>
-                        <span>com o <b class="font-bold">CadARCA</b></span>
+                        <span>com a <b class="font-bold">ARCA</b></span>
                     </div>
-                    <p class="text-sm text-text">Insira seu CadARCA e senha para entrar no SICAR.</p>
+                    <p class="text-sm text-text">Cadastre-se no SICAR.</p>
                     <div>
                         <label class="block text-sm mb-1 text-title font-bold font-title">CadARCA <span class="text-orange-600">*</span></label>
                         <input
@@ -589,13 +627,49 @@
                         type="text" placeholder="00000000000"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
+                        <p v-if="cadarcaError" class="text-xs text-red-600 mt-1">
+                            {{ cadarcaError }}
+                        </p>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1 text-title font-bold font-title">Nome Completo <span class="text-orange-600">*</span></label>
+                        <input
+                        v-model="nome"
+                        type="text" placeholder="Nome Completo"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
+                        />
+                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+                            {{ nomeError }}
+                        </p>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1 text-title font-bold font-title ">Data de nascimeto <span class="text-orange-600">*</span></label>
+                        <input
+                        v-model="nascimento"
+                        type="date"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
+                        />
+                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+                            {{ nascimentoError }}
+                        </p>
                     </div>
         
                     <div class="relative">
+                        <label class="block text-sm mb-1 text-title font-bold font-title">Senha <span class="text-orange-600">*</span></label>
                         <input
                         v-model="senha"
+                        :type="showPassword ? 'text' : 'password'" placeholder="Cire sua senha"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
+                        />
+                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+                            {{ senhaError }}
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <input
+                        v-model="confirmarSenha"
                         :type="showPassword ? 'text' : 'password'"
-                        placeholder="Digite sua senha"
+                        placeholder="Confirme sua senha"
                         class="w-full px-4 py-2 pr-12 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600 bg-bg"
                         />
 
@@ -628,8 +702,8 @@
                             <path d="M11.8145 6.63158L15.2727 10.1242V9.94737C15.2727 9.06797 14.9279 8.22458 14.3142 7.60275C13.7004 6.98092 12.868 6.63158 12 6.63158H11.8145ZM7.12364 7.51579L8.81455 9.22895C8.76 9.46105 8.72727 9.69316 8.72727 9.94737C8.72727 10.8268 9.07208 11.6702 9.68583 12.292C10.2996 12.9138 11.132 13.2632 12 13.2632C12.24 13.2632 12.48 13.23 12.7091 13.1747L14.4 14.8879C13.6691 15.2526 12.8618 15.4737 12 15.4737C10.5534 15.4737 9.16598 14.8914 8.14305 13.8551C7.12013 12.8187 6.54545 11.413 6.54545 9.94737C6.54545 9.07421 6.76364 8.25632 7.12364 7.51579ZM1.09091 1.40368L3.57818 3.92368L4.06909 4.42105C2.26909 5.85789 0.850909 7.73684 0 9.94737C1.88727 14.7995 6.54545 18.2368 12 18.2368C13.6909 18.2368 15.3055 17.9053 16.7782 17.3084L17.2473 17.7726L20.4327 21L21.8182 19.5963L2.47636 0M12 4.42105C13.4466 4.42105 14.834 5.00329 15.8569 6.03967C16.8799 7.07606 17.4545 8.4817 17.4545 9.94737C17.4545 10.6547 17.3127 11.34 17.0618 11.9589L20.2582 15.1974C21.8945 13.8158 23.2036 12.0032 24 9.94737C22.1127 5.09526 17.4545 1.65789 12 1.65789C10.4727 1.65789 9.01091 1.93421 7.63636 2.43158L10.0036 4.80789C10.6255 4.56474 11.2909 4.42105 12 4.42105Z"/>
                         </svg>
                         </button>
-                        <p v-if="error" class="text-sm text-red-600 mb-4">
-                            {{ error }}
+                        <p v-if="confirmarSenhaError" class="text-sm text-red-600 mb-4">
+                            {{ confirmarSenhaError }}
                         </p>
                     </div>
         
@@ -641,15 +715,15 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="currentColor" class="fill-btn-text">
                             <path d="M3 3.07895C3 4.77647 4.346 6.15789 6 6.15789C7.654 6.15789 9 4.77647 9 3.07895C9 1.38142 7.654 0 6 0C4.346 0 3 1.38142 3 3.07895ZM11.3333 13H12V12.3158C12 9.67542 9.906 7.52632 7.33333 7.52632H4.66667C2.09333 7.52632 0 9.67542 0 12.3158V13H11.3333Z"/>
                         </svg>
-                        {{ loading ? 'ENTRANDO...' : 'ENTRAR' }}
+                        {{ loading ? 'CRIANDO...' : 'CRIAR CONTA' }}
                     </BaseButton>
 
-                    <BaseLink peso="regular">Não possui conta? <b class="font-medium">Cadastre-se agora!</b></BaseLink>
+                    <BaseLink peso="regular" to="/login/comum">Já possui conta? <b class="font-medium">Entre agora!</b></BaseLink>
                 </form>
                 <div class="flex flex-col-reverse lg:flex-col gap-6">
-                    <div class="lg:text-right text-center flex flex-col lg:items-end items-center">
-                        <h1 class="text-blue-500 sm:text-5xl font-bold text-3xl">Boas vindas de volta!</h1>
-                        <h6 class="text-text lg:text-lg max-w-110 text-sm">Acesse sua conta para continuar aproveitando todos os recursos da ARCA.</h6>
+                    <div class="lg:text-left text-center flex flex-col lg:items-start items-center">
+                        <h1 class="text-blue-500 sm:text-5xl font-bold text-3xl">Boas vindas!</h1>
+                        <h6 class="text-text lg:text-lg max-w-110 text-sm">Crie uma conta para aproveitar todos os recursos da ARCA.</h6>
                     </div>
                     <GeometricDraw/>
                 </div>

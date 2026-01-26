@@ -12,6 +12,10 @@ const cpf = ref('')
 const nome = ref('')
 const nascimento = ref('')
 const senha = ref('')
+const showPassword = ref(false)
+const togglePassword = () => {
+    showPassword.value = !showPassword.value
+}
 const confirmarSenha = ref('')
 
 const loading = ref(false)
@@ -85,10 +89,7 @@ const submit = async () => {
     return
   }
 
-    const formatDateToAPI = (date) => {
-        if (!date) return null
-        return new Date(date).toISOString().split('T')[0]
-    }
+    
 
 
   try {
@@ -642,58 +643,88 @@ const submit = async () => {
                     </div>
                     <p class="text-sm text-text">Cadastre-se no SICAR.</p>
                     <div>
-                        <label class="block text-sm mb-1 text-title font-bold font-title placeholder:text-clarinho">CPF <span class="text-orange-600">*</span></label>
+                        <label class="block text-sm mb-1 text-title font-bold font-title">CPF <span class="text-orange-600">*</span></label>
                         <input
                         v-model="cpf"
                         type="text" placeholder="000.000.000-00"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
                         <p v-if="cpfError" class="text-xs text-red-600 mt-1">
                             {{ cpfError }}
                         </p>
                     </div>
                     <div>
-                        <label class="block text-sm mb-1 text-title font-bold font-title placeholder:text-clarinho">Nome Completo <span class="text-orange-600">*</span></label>
+                        <label class="block text-sm mb-1 text-title font-bold font-title">Nome Completo <span class="text-orange-600">*</span></label>
                         <input
                         v-model="nome"
                         type="text" placeholder="Nome Completo"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
                         <p v-if="nomeError" class="text-xs text-red-600 mt-1">
                             {{ nomeError }}
                         </p>
                     </div>
                     <div>
-                        <label class="block text-sm mb-1 text-title font-bold font-title placeholder:text-clarinho">Data de nascimeto <span class="text-orange-600">*</span></label>
+                        <label class="block text-sm mb-1 text-title font-bold font-title ">Data de nascimeto <span class="text-orange-600">*</span></label>
                         <input
                         v-model="nascimento"
                         type="date"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
                         <p v-if="nomeError" class="text-xs text-red-600 mt-1">
                             {{ nascimentoError }}
                         </p>
                     </div>
         
-                    <div>
+                    <div class="relative">
                         <label class="block text-sm mb-1 text-title font-bold font-title">Senha <span class="text-orange-600">*</span></label>
                         <input
                         v-model="senha"
-                        type="password"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        :type="showPassword ? 'text' : 'password'" placeholder="Cire sua senha"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
                         <p v-if="nomeError" class="text-xs text-red-600 mt-1">
                             {{ senhaError }}
                         </p>
                     </div>
-                    <div>
-                        <label class="block text-sm mb-1 text-title font-bold font-title">Confirmar senha <span class="text-orange-600">*</span></label>
+                    <div class="relative">
                         <input
                         v-model="confirmarSenha"
-                        type="password"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        :type="showPassword ? 'text' : 'password'"
+                        placeholder="Confirme sua senha"
+                        class="w-full px-4 py-2 pr-12 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600 bg-bg"
                         />
-                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+
+                        <button
+                        type="button"
+                        @click="togglePassword"
+                        class="absolute inset-y-0 right-3 flex items-center text-clarinho hover:text-orange-600 transition hover:cursor-pointer"
+                        aria-label="Mostrar senha"
+                        >
+                        <svg
+                            v-if="!showPassword"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path d="M12 5c-7.633 0-12 6.545-12 7s4.367 7 12 7 12-6.545 12-7-4.367-7-12-7zm0 12c-2.761 0-5-2.239-5-5s2.239-5 5-5 5 2.239 5 5-2.239 5-5 5z"/>
+                            <circle cx="12" cy="12" r="2.5"/>
+                        </svg>
+
+                        <svg
+                            v-else
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="16"
+                            viewBox="0 0 24 21"
+                            fill="currentColor"
+                        >
+                            <path d="M11.8145 6.63158L15.2727 10.1242V9.94737C15.2727 9.06797 14.9279 8.22458 14.3142 7.60275C13.7004 6.98092 12.868 6.63158 12 6.63158H11.8145ZM7.12364 7.51579L8.81455 9.22895C8.76 9.46105 8.72727 9.69316 8.72727 9.94737C8.72727 10.8268 9.07208 11.6702 9.68583 12.292C10.2996 12.9138 11.132 13.2632 12 13.2632C12.24 13.2632 12.48 13.23 12.7091 13.1747L14.4 14.8879C13.6691 15.2526 12.8618 15.4737 12 15.4737C10.5534 15.4737 9.16598 14.8914 8.14305 13.8551C7.12013 12.8187 6.54545 11.413 6.54545 9.94737C6.54545 9.07421 6.76364 8.25632 7.12364 7.51579ZM1.09091 1.40368L3.57818 3.92368L4.06909 4.42105C2.26909 5.85789 0.850909 7.73684 0 9.94737C1.88727 14.7995 6.54545 18.2368 12 18.2368C13.6909 18.2368 15.3055 17.9053 16.7782 17.3084L17.2473 17.7726L20.4327 21L21.8182 19.5963L2.47636 0M12 4.42105C13.4466 4.42105 14.834 5.00329 15.8569 6.03967C16.8799 7.07606 17.4545 8.4817 17.4545 9.94737C17.4545 10.6547 17.3127 11.34 17.0618 11.9589L20.2582 15.1974C21.8945 13.8158 23.2036 12.0032 24 9.94737C22.1127 5.09526 17.4545 1.65789 12 1.65789C10.4727 1.65789 9.01091 1.93421 7.63636 2.43158L10.0036 4.80789C10.6255 4.56474 11.2909 4.42105 12 4.42105Z"/>
+                        </svg>
+                        </button>
+                        <p v-if="confirmarSenhaError" class="text-sm text-red-600 mb-4">
                             {{ confirmarSenhaError }}
                         </p>
                     </div>

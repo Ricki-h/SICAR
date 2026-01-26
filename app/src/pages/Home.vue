@@ -8,6 +8,7 @@
     import ServiceCard from '../components/ui/servico/ServiceCard.vue';
     import BaseButton from '../components/ui/BaseButton.vue';
     import CardOuvidoria from '../components/ui/CardOuvidoria.vue';
+    import Loading from '../components/ui/Loading.vue';
 
 const services = ref([])
 
@@ -53,6 +54,9 @@ const randomServices = computed(() => {
                     :key="service.id"
                     :service="service"
                     />
+                </div>
+                <div v-else>
+                    <Loading/>
                 </div>
     
                 <BaseButton color="orange" to="/services" class="lg:max-w-96 sm:max-w-78 w-full">TODOS OS SERVIÇOS</BaseButton>

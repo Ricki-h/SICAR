@@ -18,8 +18,8 @@ const open = ref(false)
 
         <div class="flex gap-2 items-center">
             <template v-if="!auth.isAuthenticated">
-                <BaseButton color="orange" variant="outline">
-                Cadastrar-se
+                <BaseButton color="orange" to="/login/comum">
+                Entrar
                 </BaseButton>
             </template>
             <UserMenu v-else />

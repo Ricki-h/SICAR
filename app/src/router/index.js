@@ -9,6 +9,7 @@ const routes = [
   { path: '/login/comum', component: () => import('../pages/LoginComum.vue') },
   { path: '/login/cadarca', component: () => import('../pages/LoginCadarca.vue') },
   { path: '/cadastro/comum', component: () => import('../pages/CadastroComum.vue') },
+  { path: '/cadastro/cadarca', component: () => import('../pages/CadastroCadarca.vue') },
   { path: '/confirmacao', component: () => import('../pages/Confirmacao.vue'), name: 'confirmacao' },
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
