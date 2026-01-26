@@ -13,45 +13,77 @@
     const loading = ref(false);
     const error = ref(null);
 
+    const onlyNumbers = (v) => v.replace(/\D/g, '')
+
+    const formatCPF = (v) => {
+    const numbers = onlyNumbers(v).slice(0, 11)
+
+    return numbers
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+    }
+
+    const cpfValido = (cpf) => {
+    cpf = onlyNumbers(cpf)
+
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false
+
+    let sum = 0
+    for (let i = 0; i < 9; i++) {
+        sum += parseInt(cpf[i]) * (10 - i)
+    }
+    let firstDigit = (sum * 10) % 11
+    if (firstDigit === 10) firstDigit = 0
+    if (firstDigit !== parseInt(cpf[9])) return false
+
+    sum = 0
+    for (let i = 0; i < 10; i++) {
+        sum += parseInt(cpf[i]) * (11 - i)
+    }
+    let secondDigit = (sum * 10) % 11
+    if (secondDigit === 10) secondDigit = 0
+
+    return secondDigit === parseInt(cpf[10])
+    }
+    
+
+    watch(cpf, (value) => {
+        cpf.value = formatCPF(value)
+    })
+
+
     const auth  = useAuthStore()
     const router = useRouter()
-    
-    const onlyNumbers = (c) => c.replace(/\D/g, '')
-    const formatCpf = (c) => {
-        const numbers = onlyNumbers(c).slice(0, 11)
-
-        return numbers.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')
-    }
-    const cpfValido = (cpf) => {
-        cpf = onlyNumbers(cpf)
-
-        if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false
-
-        let sum = 0
-        for (let i = 0; i < 9; i++) {
-            sum += parseInt(cpf[i]) * (10 - i)
-        }
-        let firstDigit = (sum * 10) % 11
-        if (firstDigit === 10) firstDigit = 0
-        if (firstDigit !== parseInt(cpf[9])) return false
-
-        sum = 0
-        for (let i = 0; i < 10; i++) {
-            sum += parseInt(cpf[i]) * (11 - i)
-        }
-        let secondDigit = (sum * 10) % 11
-        if (secondDigit === 10) secondDigit = 0
-
-        return secondDigit === parseInt(cpf[10])
-    }
 
     const submit = async() => {
         error.value = null;
+        cpfError.value = null
         loading.value = true;
+
+        const cpfNumeros = onlyNumbers(cpf.value)
+
+        if (!cpfNumeros) {
+            cpfError.value = 'CPF é obrigatório'
+            loading.value = false
+            return
+        }
+
+        if (!cpfValido(cpfNumeros)) {
+            cpfError.value = 'CPF inválido'
+            loading.value = false
+            return
+        }
+
+        if (!senha.value) {
+            error.value = 'Senha é obrigatória'
+            loading.value = false
+            return
+        }
 
         try {
             const { data } = await api.post('/usuarios/login/comum', {
-                cpf: cpf.value,
+                cpf: cpfNumeros,
                 senha: senha.value,
             });
 
@@ -599,12 +631,15 @@
                     </div>
                     <p class="text-sm text-text">Insira seu CPF e senha para entrar no SICAR.</p>
                     <div>
-                        <label class="block text-sm mb-1 text-title font-bold font-title">CPF <span class="text-orange-600">*</span></label>
+                        <label class="block text-sm mb-1 text-title font-bold font-title placeholder:text-clarinho">CPF <span class="text-orange-600">*</span></label>
                         <input
                         v-model="cpf"
-                        type="text"
+                        type="text" placeholder="000.000.000-00"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
                         />
+                        <p v-if="cpfError" class="text-xs text-red-600 mt-1">
+                            {{ cpfError }}
+                        </p>
                     </div>
         
                     <div>
@@ -627,7 +662,7 @@
                         {{ loading ? 'ENTRANDO...' : 'ENTRAR' }}
                     </BaseButton>
 
-                    <BaseLink peso="regular">Não possui conta? <b class="font-medium">Cadastre-se agora!</b></BaseLink>
+                    <BaseLink peso="regular" to="/cadastro/comum">Não possui conta? <b class="font-medium">Cadastre-se agora!</b></BaseLink>
                 </form>
                 <div class="flex flex-col-reverse lg:flex-col gap-6">
                     <div class="lg:text-right text-center flex flex-col lg:items-end items-center">
