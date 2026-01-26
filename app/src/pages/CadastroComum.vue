@@ -23,7 +23,6 @@ const nascimentoError = ref(null)
 const senhaError = ref(null)
 const confirmarSenhaError = ref(null)
 
-/* ---------- CPF utils ---------- */
 const onlyNumbers = (v) => v.replace(/\D/g, '')
 
 const formatCPF = (v) => {
@@ -58,7 +57,6 @@ watch(cpf, (v) => {
   cpf.value = formatCPF(v)
 })
 
-/* ---------- Submit ---------- */
 const submit = async () => {
   error.value = null
   cpfError.value = nomeError.value = nascimentoError.value = senhaError.value = confirmarSenhaError.value = null
@@ -87,16 +85,23 @@ const submit = async () => {
     return
   }
 
+    const formatDateToAPI = (date) => {
+        if (!date) return null
+        return new Date(date).toISOString().split('T')[0]
+    }
+
+
   try {
     await api.post('/usuarios/create', {
-      cpf: cpfNumeros,
-      nome: nome.value,
-      dataNascimento: nascimento.value,
-      senha: senha.value,
-      tipo: 'comum'
+        cpf: cpfNumeros,
+        nome: nome.value,
+        data_nasc: nascimento.value,
+        senha: senha.value,
+        tipo: 'comum'
     })
 
-    router.push('/login/comum')
+    router.push({ name: 'confirmacao', query: { type: 'cadastro' } })
+
   } catch (e) {
     error.value = 'Erro ao realizar cadastro'
   } finally {
@@ -666,7 +671,7 @@ const submit = async () => {
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
                         />
                         <p v-if="nomeError" class="text-xs text-red-600 mt-1">
-                            {{ nomeError }}
+                            {{ nascimentoError }}
                         </p>
                     </div>
         
@@ -677,6 +682,20 @@ const submit = async () => {
                         type="password"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
                         />
+                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+                            {{ senhaError }}
+                        </p>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1 text-title font-bold font-title">Confirmar senha <span class="text-orange-600">*</span></label>
+                        <input
+                        v-model="confirmarSenha"
+                        type="password"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text"
+                        />
+                        <p v-if="nomeError" class="text-xs text-red-600 mt-1">
+                            {{ confirmarSenhaError }}
+                        </p>
                     </div>
         
                     <p v-if="error" class="text-sm text-red-600 mb-4">
@@ -687,7 +706,7 @@ const submit = async () => {
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="currentColor" class="fill-btn-text">
                             <path d="M3 3.07895C3 4.77647 4.346 6.15789 6 6.15789C7.654 6.15789 9 4.77647 9 3.07895C9 1.38142 7.654 0 6 0C4.346 0 3 1.38142 3 3.07895ZM11.3333 13H12V12.3158C12 9.67542 9.906 7.52632 7.33333 7.52632H4.66667C2.09333 7.52632 0 9.67542 0 12.3158V13H11.3333Z"/>
                         </svg>
-                        {{ loading ? 'ENTRANDO...' : 'ENTRAR' }}
+                        {{ loading ? 'CRIANDO...' : 'CRIAR CONTA' }}
                     </BaseButton>
 
                     <BaseLink peso="regular" to="/login/comum">Já possui conta? <b class="font-medium">Entre agora!</b></BaseLink>

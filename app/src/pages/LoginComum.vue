@@ -91,7 +91,8 @@
 
             await auth.fetchUser()
 
-            router.push('/')
+            router.push({ name: 'confirmacao', query: { type: 'login' } })
+
         } catch (e) {
             error.value = 'CPF ou senha inválidos'
         } finally {
