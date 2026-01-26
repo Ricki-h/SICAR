@@ -1,5 +1,5 @@
 <script setup>
-    import { ref } from 'vue';
+    import { ref, computed, watch } from 'vue';
     import { useRouter } from 'vue-router';
     import { useAuthStore } from '../stores/auth'
     import api from '../services/api'
@@ -8,12 +8,42 @@
     import BaseLink from '../components/ui/BaseLink.vue';
 
     const cpf = ref('');
+    const cpfError = ref(null)
     const senha = ref('');
     const loading = ref(false);
     const error = ref(null);
 
     const auth  = useAuthStore()
     const router = useRouter()
+    
+    const onlyNumbers = (c) => c.replace(/\D/g, '')
+    const formatCpf = (c) => {
+        const numbers = onlyNumbers(c).slice(0, 11)
+
+        return numbers.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+    }
+    const cpfValido = (cpf) => {
+        cpf = onlyNumbers(cpf)
+
+        if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false
+
+        let sum = 0
+        for (let i = 0; i < 9; i++) {
+            sum += parseInt(cpf[i]) * (10 - i)
+        }
+        let firstDigit = (sum * 10) % 11
+        if (firstDigit === 10) firstDigit = 0
+        if (firstDigit !== parseInt(cpf[9])) return false
+
+        sum = 0
+        for (let i = 0; i < 10; i++) {
+            sum += parseInt(cpf[i]) * (11 - i)
+        }
+        let secondDigit = (sum * 10) % 11
+        if (secondDigit === 10) secondDigit = 0
+
+        return secondDigit === parseInt(cpf[10])
+    }
 
     const submit = async() => {
         error.value = null;
