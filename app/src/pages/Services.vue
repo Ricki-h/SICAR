@@ -56,7 +56,7 @@ const cadarca = computed(() =>
 
 <template>
     <TheHeader class="mb-15"></TheHeader>
-  <div class="ui-container-xl px-6 sm:px-12 lg:px-28 space-y-10 mb-15">
+  <div class="ui-container-xl px-6 sm:px-12 lg:px-28 space-y-10 mb-25">
     <h1 class="text-heading font-text text-4xl sm:text-5xl font-bold">Serviços</h1>
     <SearchBar
       :items="services"

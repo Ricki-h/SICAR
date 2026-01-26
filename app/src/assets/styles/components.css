@@ -75,13 +75,4 @@
   .ui-container-xl {
     @apply max-w-360 mx-auto;
   }
-  .ui-mx-xl {
-    @apply px-28
-  }
-  .ui-mx-md {
-    @apply px-12
-  }
-  .ui-mx-sm {
-    @apply px-6
-  }
 }
