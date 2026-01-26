@@ -6,7 +6,8 @@ const props = defineProps({
   to: { type: [String, Object], default: null },
   href: { type: String, default: null },
   color: { type: String, default: 'title' },
-  size: { type: String, default: 'sm' }
+  size: { type: String, default: 'sm' },
+  peso: { type: String, default: 'medium' }
 })
 
 const isRouter = computed(() => !!props.to)
@@ -14,7 +15,8 @@ const isRouter = computed(() => !!props.to)
 const classes = computed(() => [
   `ui-link`,
   `ui-link-${props.color}`,
-  `text-${props.size}`
+  `text-${props.size}`,
+  `font-${props.peso}`
 ])
 </script>
 

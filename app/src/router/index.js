@@ -7,6 +7,7 @@ const routes = [
   },
   { path: '/sobre', component: () => import('../pages/Sobre.vue') },
   { path: '/login/comum', component: () => import('../pages/LoginComum.vue') },
+  { path: '/login/cadarca', component: () => import('../pages/LoginCadarca.vue') },
   { path: '/cadastro/comum', component: () => import('../pages/CadastroComum.vue') },
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },

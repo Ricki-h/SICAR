@@ -7,6 +7,7 @@ import SearchBar from '../components/ui/SearchBar.vue'
 import api from '../services/api'
 import Badge from '../components/ui/Badge.vue'
 import BaseButton from '../components/ui/BaseButton.vue'
+import Loading from '../components/ui/Loading.vue'
 
 const route = useRoute()
 const service = ref(null)
@@ -69,6 +70,10 @@ onMounted(loadService)
                     </div>
                 </div>
             </div>
+        </div>
+        <div v-else class="w-full flex items-center justify-center">
+            <Loading/>
+
         </div>
     </main>
 

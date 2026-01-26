@@ -22,7 +22,6 @@ const auth = useAuthStore()
             <BaseLink>Acessibilidade</BaseLink>
             <BaseLink>Blog</BaseLink>
             <BaseLink to="/">Home</BaseLink>
-
             <BaseDropDown label="Funcionalidades">
                 <li><BaseLink color="text">Cursos</BaseLink></li>
                 <li><BaseLink color="text" to="/services">Serviços</BaseLink></li>
@@ -31,6 +30,7 @@ const auth = useAuthStore()
                 <li><BaseLink color="text">Empresas</BaseLink></li>
                 <li><BaseLink color="text">Fazer Denúncia</BaseLink></li>
             </BaseDropDown>
+
 
             <div v-if="!auth.isAuthenticated" class="flex items-center gap-2">
                 <BaseButton color="orange" to="/login/comum">Entrar</BaseButton>

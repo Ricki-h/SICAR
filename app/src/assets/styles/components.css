@@ -56,7 +56,7 @@
 
   /* Link */
   .ui-link {
-    @apply font-medium hover:underline hover:cursor-pointer hover:text-orange-600 font-text;
+    @apply hover:underline hover:cursor-pointer hover:text-orange-600 font-text;
   }
   .ui-link-title {
     @apply text-title;
