@@ -129,6 +129,18 @@ const randomServices = computed(() => {
                     CadARCA é o Cadastro do Sistema da ARCA, destinado a pessoas que não possuem CPF e estão em situação de vulnerabilidade. è possível fazer um em qualquer ARCA-Center e permite acesso a diversos tipos de ajuda financeira e assistência social, tanto por parte do governo quanto por parte das ONGs.
                 </div>
             </div>
+            <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
+                <div class="collapse-title sm:text-xl text-base text-title font-semibold">Como posso contribuir com as ONGs parceiras?</div>
+                <div class="collapse-content text-text text-sm sm:text-base">
+                    Para contribuição financeira, é possível acessar a aba ONGs e clicar em "Ajudar Ong".
+                </div>
+            </div>
+            <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
+                <div class="collapse-title sm:text-xl text-base text-title font-semibold">Os cursos estão disponíveis apenas para usuários do CadARCA?</div>
+                <div class="collapse-content text-text text-sm sm:text-base">
+                    Na aba cursos, há diversos cursos divididos em cursos regulares, os quais podem ser acessados por todos os usuários, e cursos CadARCA, específicos para esse tipo de usuário.
+                </div>
+            </div>
 
         </section>
     </main>
