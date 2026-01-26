@@ -1,9 +1,15 @@
 <script setup>
-import CardOuvidoria from './components/CardOuvidoria.vue'
-// import TheDropdown from './components/TheDropdown.vue'
-import TheOuvidoria from './components/TheOuvidoria.vue'
+import CardOuvidoria from './components/CardOuvidoria.vue';
+import TheOuvidoria from './components/TheOuvidoria.vue';
+import TheFaq from './components/TheFaq.vue';
 </script>
 
+<template>
+  <TheFaq></TheFaq>
+</template>
+
+<!-- PARTE JÁ FINALIZADA -->
+<!-- 
 <template>
   <div class="max-w-7xl mx-auto">
     <div class="max-w-6xl flex flex-col gap-10 mx-auto p-4 md:px-0">
@@ -63,7 +69,7 @@ import TheOuvidoria from './components/TheOuvidoria.vue'
   </div>
 
 
-</template>
+</template> -->
 
 <style scoped>
 </style>
