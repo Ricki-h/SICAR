@@ -1,6 +1,6 @@
 <script setup>
-import CardOuvidoria from './components/CardOuvidoria.vue';
-import TheOuvidoria from './components/TheOuvidoria.vue';
+// import CardOuvidoria from './components/CardOuvidoria.vue';
+// import TheOuvidoria from './components/TheOuvidoria.vue';
 import TheFaq from './components/TheFaq.vue';
 </script>
 
