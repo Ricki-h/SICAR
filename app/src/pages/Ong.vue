@@ -33,16 +33,18 @@ const handlePageChange = (newPage) => {
       
       <TheHeader />
   
-      <main class="max-w-5xl mx-auto py-12 px-6 w-full flex-grow">
-        <h1 class="text-5xl font-bold text-blue-950 mb-8">ONGs</h1>
+      <main class="max-w-6xl mx-auto py-12 px-6 w-full flex-grow">
+        <h1 class="text-heading text-5xl font-bold text-blue-950 mb-8">ONGs</h1>
   
-        
-        <OngSection 
+        <div class="max-w-5xl">
+          <OngSection 
           :ong="listaDeOngs" 
           :page="currentPage" 
           :perPage="6"
           @page-change="handlePageChange"
         />
+        </div>
+        
       </main>
   
       

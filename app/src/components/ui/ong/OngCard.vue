@@ -9,14 +9,15 @@ const props = defineProps({
 })
 
 
+
 </script>
 
 <template>
-    <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col border border-gray-100">
+    <div class="rounded-lg shadow-md overflow-hidden flex flex-col border border-gray-100">
       <div class="h-48 bg-gray-300 w-full"></div>
       
       <div class="p-5 flex flex-col gap-4">
-        <h3 class="text-xl font-bold text-gray-800">
+        <h3 class="font-text text-heading text-xl font-bold text-gray-800">
           {{ ong.titulo }}
         </h3>
   
@@ -37,8 +38,9 @@ const props = defineProps({
             <p class="text-3xl font-bold text-orange-500">{{ ong.arrecadado }}</p>
           </div>
         </div>
+        <hr class="border-[#E5E5E5]">
   
-        <BaseButton class="w-full" color="neutral"> Ajudar ONG </BaseButton>
+        <BaseButton class="w-full" color="neutral" to="/doacao"> Ajudar ONG </BaseButton>
       </div>
     </div>
 </template>

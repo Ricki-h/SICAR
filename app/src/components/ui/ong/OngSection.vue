@@ -44,13 +44,15 @@ const paginated = computed(() => {
       />
     </div>
 
-    
-    <Pagination
+    <div class="flex justify-center">
+      <Pagination
       v-if="ong.length > perPage"
       :items="ong"
       :currentPage="page"
       :perPage="perPage"
       @page-change="emit('page-change', $event)"
     />
+    </div>
+    
   </div>
 </template>
