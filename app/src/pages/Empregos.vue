@@ -56,3 +56,64 @@ const cadarca = computed(() =>
   filtered.value.filter(s => s.desabrigado)
 )
 </script>
+
+<template>
+    <TheHeader class="mb-15"/>
+
+    <main class="ui-container-xl px-6 sm:px-12 lg:px-28 space-y-10 mb-25">
+      <h1 class="text-heading font-text text-4xl sm:text-5xl font-bold">Empregos</h1>
+
+      <SearchBar
+        :items="services"
+        searchKey="Titulo"
+        @results="searchResults = $event"
+      />
+
+      <div class="flex flex-col lg:flex-row-reverse gap-10 lg:gap-6">
+        <CategoriaFiltro class="h-full"
+          :categorias="categorias"
+          :activeCategoria="categoriaAtiva"
+          @categoriaChange="categoriaAtiva = $event"
+        />
+    
+          <div class="flex-1 space-y-12">
+    
+            <section>
+                <h2 class="text-3xl font-title mb-6 text-heading font-bold text-center sm:text-left">
+                    Vagas para Ususários Regulares
+                </h2>
+    
+                <EmpregoSection v-if="!loading"
+                    :empregos="regulares"
+                    :perPage="PER_PAGE"
+                    :page="pageRegulares"
+                    @page-change="pageRegulares = $event"
+                />
+                <div v-else class="flex w-full justify-center items-center">
+                  <Loading/>
+                </div>
+
+            </section>
+    
+            <section>
+                <h2 class="text-3xl font-title mb-6 text-heading font-bold text-center sm:text-left">
+                    Vagas para Usuários CadARCA
+                </h2>
+    
+                <EmpregoSection v-if="!loading && cadarca.length"
+                    :empregos="cadarca"
+                    :perPage="PER_PAGE"
+                    :page="pageCadarca"
+                    @page-change="pageCadarca = $event"
+                />
+                <div v-else-if="loading" class="flex w-full justify-center items-center">
+                  <Loading/>
+                </div>
+            </section>
+    
+          </div>
+    </div>
+    </main>
+
+    <TheFooter class="mb-15"/>
+</template>
