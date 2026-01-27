@@ -13,11 +13,11 @@ import BaseButton from './BaseButton.vue';
             <h6 class="font-text text-[#142457] max-w-60 sm:max-w-full text-center text-xs sm:text-sm lg:text-base">O Sistema Integrado da ARCA está sempre disposto a atender suas necessidades.</h6>
 
             <div class="max-w-30 flex flex-col gap-3 sm:hidden">
-                <BaseButton color="blue" size="sm" class="w-full">SOBRE NÓS</BaseButton>
+                <BaseButton color="blue" size="sm" class="w-full" to="/sobre">SOBRE NÓS</BaseButton>
                 <BaseButton color="neutral" size="sm" class="w-full">CADASTRE-SE</BaseButton>
             </div>
             <div class="w-96 sm:flex gap-3 hidden">
-                <BaseButton color="blue" class="w-full">SOBRE NÓS</BaseButton>
+                <BaseButton color="blue" class="w-full" to="/sobre">SOBRE NÓS</BaseButton>
                 <BaseButton color="neutral" class="w-full" to="/cadastro/comum">CADASTRE-SE</BaseButton>
             </div>
         </div>
