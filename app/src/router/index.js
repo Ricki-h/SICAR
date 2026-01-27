@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 
 const routes = [
   {
@@ -13,11 +14,21 @@ const routes = [
   { path: '/confirmacao', component: () => import('../pages/Confirmacao.vue'), name: 'confirmacao' },
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
+
+  { path: '/conta', meta: { requiresAuth: true }, children: [ {
+      path: 'dados-pessoais', component: () => import('../pages/DadosPessoais.vue')
+  }]}
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isAuthenticated)
+    return '/login/comum'
 })
 
 export default router
