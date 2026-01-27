@@ -34,10 +34,10 @@ const selectCategoria = (categoriaId) => {
             </svg>
         </button>
         <ul v-show="open" class="px-6 flex flex-col justify-end w-full text-sm lg:text-base pb-6">
-            <button v-for="categoria in allCategorias" :key="categoria.id" @click="selectCategoria(categoria.id)"
-            class="p-2 w-full text-text hover:bg-bg-blue-hover hover:cursor-pointer transition duration-300 text-left" 
-            :class="[activeCategoria === categoria.id || (categoria.id === 'all' && !activeCategoria) ? 'bg-orange-600 text-white' : 'text-text' ]">
-                {{ categoria.nome }}
+            <button v-for="categoria in allCategorias" :key="categoria.id" @click="selectCategoria(categoria.id ? categoria.id : categoria.ID)"
+            class="p-2 w-full text-text hover:bg-bg-blue-hover hover:cursor-pointer transition duration-300 text-left text-sm" 
+            :class="[activeCategoria === (categoria.id || categoria.ID) || (categoria.id === 'all' && !activeCategoria) ? 'bg-orange-600 text-white' : 'text-text' ]">
+                {{ categoria.nome ? categoria.nome : categoria.Nome }}
             </button>
         </ul>
     </div>

@@ -14,6 +14,7 @@ const routes = [
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
   { path: '/vagas', component: () => import('../pages/Empregos.vue') },
+  { path: '/vagas/:id', component: () => import('../pages/Emprego.vue'), props: true },
 ]
 
 const router = createRouter({

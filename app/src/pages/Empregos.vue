@@ -4,7 +4,7 @@ import api from '../services/api'
 
 import SearchBar from '../components/ui/SearchBar.vue'
 import CategoriaFiltro from '../components/ui/CategoriaFiltro.vue'
-import EmpregoSection from '../components/ui/servico/EmpregoSection.vue'
+import EmpregoSection from '../components/ui/empregos/EmpregoSection.vue'
 import TheHeader from '../components/ui/TheHeader.vue'
 import TheFooter from '../components/ui/TheFooter.vue'
 import Loading from '../components/ui/Loading.vue'
@@ -22,7 +22,7 @@ const PER_PAGE = 6
 
 
 onMounted(async () => {
-  const { data: oportunidades } = await api.get('/empregooportunidades/all')
+  const { data: oportunidades } = await api.get('/empregooportunidade/all')
   const { data: categoriasApi } = await api.get('/empregocategoria/all')
   empregos.value = oportunidades
   categorias.value = categoriasApi
@@ -41,7 +41,7 @@ const filtered = computed(() => {
 
   if (categoriaAtiva.value) {
     base = base.filter(
-      s => s?.CategoriaServico?.id === categoriaAtiva.value
+      s => s?.EmpregoCategorium?.ID === categoriaAtiva.value
     )
   }
 
@@ -49,11 +49,11 @@ const filtered = computed(() => {
 })
 
 const regulares = computed(() =>
-  filtered.value.filter(s => !s.desabrigado)
+  filtered.value.filter(s => !s.Desabrigado)
 )
 
 const cadarca = computed(() =>
-  filtered.value.filter(s => s.desabrigado)
+  filtered.value.filter(s => s.Desabrigado)
 )
 </script>
 
@@ -64,7 +64,7 @@ const cadarca = computed(() =>
       <h1 class="text-heading font-text text-4xl sm:text-5xl font-bold">Empregos</h1>
 
       <SearchBar
-        :items="services"
+        :items="empregos"
         searchKey="Titulo"
         @results="searchResults = $event"
       />
