@@ -1,0 +1,16 @@
+:root {
+    @theme {
+        --bg: 250 250 250;
+        --text: 107 129 143;
+        --title: 20 23 27;
+        --heading: 20 36 87;
+        --clarinho: 178 199 218;
+        --button: 32 36 39;
+        --btntext: 255 255 255;
+        --btnhover: 8 9 10;
+        --bgblue: 238 246 255;
+        --shadow: 189 193 197;
+        --bgbluehover: 203 222 239;
+        --blackblue: 20 23 27;
+    }
+}
