@@ -105,7 +105,7 @@ const cadarca = computed(() =>
                     :page="pageCadarca"
                     @page-change="pageCadarca = $event"
                 />
-                <div v-else class="flex w-full justify-center items-center">
+                <div v-else-if="loading" class="flex w-full justify-center items-center">
                   <Loading/>
                 </div>
             </section>
