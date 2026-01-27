@@ -15,10 +15,9 @@ const routes = [
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
 
-  { path: '/conta', meta: { requiresAuth: true }, children: [ {
-      path: 'dados-pessoais', component: () => import('../pages/DadosPessoais.vue')
-  }]}
-]
+  { path: '/dados-pessoais', meta: { requiresAuth: true }, component: () => import('../pages/DadosPessoais.vue')
+  }]
+
 
 const router = createRouter({
   history: createWebHistory(),
