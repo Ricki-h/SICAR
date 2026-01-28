@@ -20,6 +20,45 @@
     const loading = ref(false)
     const preview = ref(null)
 
+    const images = ref([])
+
+    function handleImages(event) {
+        const files = Array.from(event.target.files)
+
+        if (files.length + images.value.length > 3) {
+            alert('Pode anexar até 3 imagens')
+            return
+        }
+
+        files.forEach(file => {
+            if (!file.type.startsWith('image/')) return
+
+            ...
+        })
+    }
+
+    async function submitDenuncia() {
+        loading.value = true
+
+        try {
+            const data = new FormData()
+            data.append('titulo', form.value.titulo)
+            data.append('endereco', form.value.endereco)
+            data.append('descricao', form.value.descricao)
+            data.append('data', form.value.data)
+            data.append('tipo', form.value.tipo)
+
+            await api.post('/denuncias/create', data, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+
+        } catch (err) {
+            console.log(err)
+            alert('Erro ao enviar')
+        } finally {
+            loading.value = false
+        }
+    }
     
 
 </script>
@@ -35,27 +74,36 @@
         <div class=" flex flex-col gap-3">
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Título</label>
-                <input class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Título descrevendo brevemente a denúncia" />
+                <input v-model="titulo" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Título descrevendo brevemente a denúncia" />
             </div>
             
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Endereço</label>
-                <input class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Rua das tortinhas, 650" />
+                <input v-model="endereco" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Rua das tortinhas, 650" />
             </div>
 
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Descrição</label>
-                <input class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Digite a descrição da denúncia" />
+                <textarea v-model="descricao" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Digite a descrição da denúncia" />
             </div>
 
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Data</label>
-                <input class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="dd / mm / yyyy" />
+                <input type="date" v-model="data" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="dd / mm / yyyy" />
             </div>
             
             <div class="flex flex-col gap-2">
                 <label class="font-bold">Tipo</label>
-                <input class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Selecione o tipo da denúncia" />
+                <select v-model="form.tipo" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm">
+                    <option value="">Selecione o tipo da denúncia</option>
+                    <option value="saneamento">Saneamento Básico</option>
+                    <option value="social">Social</option>
+                    <option value="ambiental">Ambiental</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="file" @change="">
             </div>
 
             <BaseButton type="button" color="blue" @click="" class="w-full">ENVIAR DENÚNCIA</BaseButton>
