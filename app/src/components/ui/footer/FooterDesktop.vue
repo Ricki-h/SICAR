@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <footer class="h-160 bg-[url('/footer-desktop.png')] w-full bg-cfit bg-center bg-repeat-x flex items-end">
+    <footer class="h-180 bg-[url('/footer-desktop.png')] w-full bg-cfit bg-center bg-repeat-x flex items-end">
         <div class="flex flex-col gap-12 w-full">
             <div class="flex justify-between px-28 ui-container-xl w-full">
                 <div class="flex flex-col gap-4 w-44">

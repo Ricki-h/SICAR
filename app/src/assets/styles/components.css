@@ -34,6 +34,9 @@
     .ui-sm {
         @apply px-4 py-1 text-xs;
     }
+    .ui-lg {
+        @apply px-8 py-3 text-xl;
+    }
 
 
     /* toggle */
