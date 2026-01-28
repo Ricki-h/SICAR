@@ -602,7 +602,7 @@
                         <button
                         type="button"
                         @click="togglePassword"
-                        class="absolute inset-y-0 right-3 flex items-center text-clarinho hover:text-orange-600 transition hover:cursor-pointer"
+                        class="absolute top-3 right-3 flex items-center text-clarinho hover:text-orange-600 transition hover:cursor-pointer"
                         aria-label="Mostrar senha"
                         >
                         <svg

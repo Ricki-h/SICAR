@@ -25,7 +25,7 @@
         tabindex="0"
         role="button"
         class="
-            flex items-center gap-3 px-2 py-2 rounded-full
+            flex items-center gap-1 px-2 py-2 rounded-full
             cursor-pointer select-none
             transition-colors
             hover:bg-bg-blue
@@ -63,7 +63,7 @@
           Olá, <strong class="text-title">{{ nomeCompleto }}</strong>
         </p>
 
-        <BaseLink class="flex items-center gap-1 group/link">Acessar Arca do Usuário
+        <BaseLink class="flex items-center gap-1 group/link" to="/perfil">Acessar Arca do Usuário
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 22 22" fill="none" stroke="CurrentColor" class="stroke-title group-hover/link:stroke-orange-600">
             <path d="M9.25014 3.62916H1.22046V20.4915H18.0828V13.2648M6.03827 14.8707L20.4917 1.22021M20.4917 1.22021H14.068M20.4917 1.22021V7.64395" stroke-width="2.44068" stroke-linecap="round"/>
           </svg>

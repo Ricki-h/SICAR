@@ -11,7 +11,7 @@ defineProps({
 
 const sizeClasses = {
   md: 'w-26 h-6.5 [&>svg]:w-full [&>svg]:h-full',
-  sm: 'w-21.5 h-5 [&>svg]:w-full [&>svg]:h-full'
+  sm: 'w-20 h-4.5 [&>svg]:w-full [&>svg]:h-full'
 }
 </script>
 

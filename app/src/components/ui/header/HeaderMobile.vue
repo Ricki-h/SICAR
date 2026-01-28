@@ -62,7 +62,7 @@ const open = ref(false)
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Cursos</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" to="/services">Serviços</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Auxílios</BaseLink></li>
-                        <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >ONGs</BaseLink></li>
+                        <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" to="ongs">ONGs</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" to="/vagas">Oportunidades</BaseLink></li>
                         <li class="w-full flex"><BaseLink  color="text px-2 py-1 hover:bg-bg-blue trasition duration-300 w-full" >Fazer Denúncia</BaseLink></li>
                     </ul>

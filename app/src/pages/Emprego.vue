@@ -12,7 +12,7 @@ const route = useRoute()
 const emprego = ref(null)
 
 const copied = ref(false)
-const link = `http://localhost:5173/vagas/${route.params.id}`
+const link = window.location.href
 const copyLink = async() => {
     navigator.clipboard.writeText(link).then(() => {
         copied.value = true
@@ -133,8 +133,8 @@ onMounted(async () => {
                   </div>
               </div>
               <div class="md:flex gap-6 hidden">
-                <BaseButton size="lg" style="squared" variant="outline" color="blue" class="rounded-xl">Salvar</BaseButton>
-                <BaseButton size="lg" style="squared" color="orange" class="rounded-xl">Candidatar-se</BaseButton>
+                <BaseButton size="xl" style="squared" variant="outline" color="blue" class="rounded-xl">Salvar</BaseButton>
+                <BaseButton size="xl" style="squared" color="orange" class="rounded-xl">Candidatar-se</BaseButton>
               </div>
               <div class="flex gap-6 md:hidden">
                 <BaseButton style="squared" variant="outline" color="blue" class="rounded-xl">Salvar</BaseButton>

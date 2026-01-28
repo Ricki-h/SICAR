@@ -1,10 +1,11 @@
 <script setup>
 import { computed } from 'vue'
 import Pagination from '../Pagination.vue'
-import EmpregoCard from './EmpregoCard.vue'
+import OngCard from './OngCard.vue'
 
 const props = defineProps({
-  empregos: {
+  
+  ong: {
     type: Array,
     default: () => []
   },
@@ -22,22 +23,29 @@ const emit = defineEmits(['page-change'])
 
 const paginated = computed(() => {
   const start = (props.page - 1) * props.perPage
-  return props.services.slice(start, start + props.perPage)
+  
+  return props.ong.slice(start, start + props.perPage)  
 })
 </script>
 
 <template>
-    <div class="flex flex-col gap-5">
-        <div class="flex flex-wrap gap-2 sm:justify-evenly justify-center">
-            <EmpregoCard v-for="emprego in paginated" :key="emprego.id" :oportunidade="emprego"></EmpregoCard>
-        </div>
+  <div class="flex flex-col gap-5">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+      <OngCard
+        v-for="ong in paginated"
+        :key="ong.id"
+        :ong="ong" 
+      />
     </div>
 
     <Pagination
-      v-if="empregos.length > perPage"
-      :items="empregos"
+      v-if="ong.length > perPage"
+      :items="ong"
       :currentPage="page"
       :perPage="perPage"
       @page-change="emit('page-change', $event)" class="flex w-full items-center justify-center"
     />
+    
+  </div>
 </template>

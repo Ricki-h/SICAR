@@ -17,7 +17,10 @@ const routes = [
   { path: '/vagas', component: () => import('../pages/Empregos.vue') },
   { path: '/vagas/:id', component: () => import('../pages/Emprego.vue'), props: true },
   { path: '/perfil/dados', component: () => import('../pages/DadosPessoais.vue'), meta: { requiresAuth: true } },
+  { path: '/perfil', component: () => import('../pages/Perfil.vue'), meta: { requiresAuth: true } },
   { path: '/login-obrigatorio', component: () => import('../pages/LoginObrigatorio.vue') },
+  { path: '/ongs', component: () => import('../pages/Ong.vue') },
+  { path: '/ongs/:id', component: () => import('../pages/OngDetalhes.vue'), props: true },
 ]
 
 const router = createRouter({

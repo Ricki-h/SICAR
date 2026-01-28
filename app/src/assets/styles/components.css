@@ -1,6 +1,6 @@
 @layer components {
     .ui-base {
-        @apply flex items-center justify-center transition focus:outline-none focus:ring-2 focus:ring-offset-2;
+        @apply flex items-center justify-center transition;
     }
     .ui-rounded {
         @apply rounded-full;
@@ -35,6 +35,9 @@
         @apply px-4 py-1 text-xs;
     }
     .ui-lg {
+        @apply px-8 py-3;
+    }
+    .ui-xl {
         @apply px-8 py-3 text-xl;
     }
 

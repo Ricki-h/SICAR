@@ -26,7 +26,7 @@ const auth = useAuthStore()
                 <li><BaseLink color="text">Cursos</BaseLink></li>
                 <li><BaseLink color="text" to="/services">Serviços</BaseLink></li>
                 <li><BaseLink color="text">Auxílios</BaseLink></li>
-                <li><BaseLink color="text">ONGs</BaseLink></li>
+                <li><BaseLink color="text" to="/ongs">ONGs</BaseLink></li>
                 <li><BaseLink color="text" to="/vagas">Oportunidades</BaseLink></li>
                 <li><BaseLink color="text">Fazer Denúncia</BaseLink></li>
             </BaseDropDown>
