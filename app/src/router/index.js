@@ -21,6 +21,7 @@ const routes = [
   { path: '/login-obrigatorio', component: () => import('../pages/LoginObrigatorio.vue') },
   { path: '/ongs', component: () => import('../pages/Ong.vue') },
   { path: '/ongs/:id', component: () => import('../pages/OngDetalhes.vue'), props: true },
+  { path: '/auxilios', component: () => import('../pages/Auxilios.vue') },
 ]
 
 const router = createRouter({
