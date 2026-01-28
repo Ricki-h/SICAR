@@ -6,7 +6,7 @@ import api from '../services/api'
 import TheHeader from '../components/ui/TheHeader.vue'
 import TheFooter from '../components/ui/TheFooter.vue'
 import BaseButton from '../components/ui/BaseButton.vue'
-
+import BaseLink from '../components/ui/BaseLink.vue'
 
 const onlyNumbers = (v) => v.replace(/\D/g, '')
 
@@ -115,7 +115,14 @@ const uploadFoto = async () => {
 
 <template>
     <TheHeader class="mb-15" />
-
+    <div class="flex flex-row items-center justify-start gap-6 max-w-7xl pb-6 border-b mb-6 mx-auto">
+        <BaseLink class="font-text" to="/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 14 24" fill="none">
+                <path d="M5.07636 11.916L13.4122 20.2519C13.8041 20.6437 14 21.1424 14 21.748C14 22.3536 13.8041 22.8524 13.4122 23.2442C13.0204 23.6361 12.5216 23.832 11.916 23.832C11.3104 23.832 10.8117 23.6361 10.4199 23.2442L0.587817 13.4122C0.374077 13.1984 0.223034 12.9669 0.134688 12.7175C0.0463426 12.4682 0.00145782 12.201 3.28835e-05 11.916C-0.00139205 11.631 0.0434928 11.3638 0.134688 11.1145C0.225884 10.8651 0.376927 10.6336 0.587817 10.4198L10.4199 0.587784C10.8117 0.195927 11.3104 0 11.916 0C12.5216 0 13.0204 0.195927 13.4122 0.587784C13.8041 0.979641 14 1.47837 14 2.08396C14 2.68956 13.8041 3.18829 13.4122 3.58014L5.07636 11.916Z" fill="#14171B"/>
+            </svg>
+        </BaseLink>
+        <h1 class="text-3xl text-blue-600 font-bold">Dados Pessoais</h1>
+    </div>
     <main class="flex flex-col md:flex-row-reverse gap-8 px-6 md:px-10 justify-evenly max-w-7xl mx-auto overflow-x-hidden">
 
         <div class="gap-8 flex flex-col items-center w-full justify-center md:w-80">
@@ -140,7 +147,7 @@ const uploadFoto = async () => {
 
             <div class="flex flex-col gap-3 w-full">
                 <label class="font-bold">Nome</label>
-                <input type="text" v-model="form.nome" class="rounded-sm px-4 py-3 w-full">
+                <input type="text" v-model="form.nome" readonly class="rounded-sm px-4 py-3 w-full">
             </div>
 
             <div class="flex flex-col gap-3 w-full">
