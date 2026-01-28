@@ -14,7 +14,8 @@ const routes = [
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
   { path: '/ong', component: () => import('../pages/Ong.vue') },
-  { path: '/doacao', component: () => import('../pages/OngDetalhes.vue') }
+  { path: '/doacao', component: () => import('../pages/OngDetalhes.vue') },
+  { path: '/cursos', component: () => import('../pages/CursosPage.vue') }
 ]
 
 const router = createRouter({
