@@ -4,10 +4,10 @@
 </script>
 
 <template>
-    <footer class="h-140 bg-[url('/footer-mobile.png')] w-full bg-fit bg-bottom bg-repeat-x flex items-end">
+    <footer class="h-150 bg-[url('/footer-mobile.png')] w-full bg-fit bg-bottom bg-repeat-x flex items-end">
         <div class="flex flex-col gap-12 w-full">
             <div class="flex justify-between px-6 ui-container-xl w-full flex-wrap gap-4">
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <h3 class="text-white text-base font-text font-semibold">Institucional</h3>
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
@@ -17,7 +17,7 @@
                         <BaseLink color="gray" size="xs">Dados Livres</BaseLink>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <h3 class="text-white text-base font-text font-semibold">Serviços</h3>
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
@@ -27,15 +27,15 @@
                         <BaseLink color="gray" size="xs">Ouvidoria</BaseLink>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <h3 class="text-white text-base font-text font-semibold">Profissional</h3>
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
-                        <BaseLink color="gray" size="xs">Oportunidades de emprego</BaseLink>
+                        <BaseLink color="gray" size="xs" to="/vagas">Oportunidades de emprego</BaseLink>
                         <BaseLink color="gray" size="xs">Catálogo de Cursos</BaseLink>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <h3 class="text-white text-base font-text font-semibold">Conteúdo</h3>
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
@@ -43,7 +43,7 @@
                         <BaseLink color="gray" size="xs">Notícias</BaseLink>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <h3 class="text-white text-base font-text font-semibold">Legal</h3>
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
@@ -52,7 +52,7 @@
                         <BaseLink color="gray" size="xs">Política de cookies</BaseLink>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-36">
+                <div class="flex flex-col gap-4 w-35">
                     <div class="flex items-center gap-2">
                         <a href="https://www.instagram.com/plano_arca/" class="group w-7 h-7 flex items-center justify-center rounded-full border border-white hover:bg-white">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20" fill="currentColor" class="fill-white group-hover:fill-orange-600">

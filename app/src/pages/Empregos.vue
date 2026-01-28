@@ -4,12 +4,12 @@ import api from '../services/api'
 
 import SearchBar from '../components/ui/SearchBar.vue'
 import CategoriaFiltro from '../components/ui/CategoriaFiltro.vue'
-import ServiceSection from '../components/ui/servico/ServiceSection.vue'
+import EmpregoSection from '../components/ui/empregos/EmpregoSection.vue'
 import TheHeader from '../components/ui/TheHeader.vue'
 import TheFooter from '../components/ui/TheFooter.vue'
 import Loading from '../components/ui/Loading.vue'
 
-const services = ref([])
+const empregos = ref([])
 const categorias = ref([])
 const searchResults = ref([])
 const categoriaAtiva = ref(null)
@@ -22,9 +22,9 @@ const PER_PAGE = 6
 
 
 onMounted(async () => {
-  const { data: servicos } = await api.get('/servicos/all')
-  const { data: categoriasApi } = await api.get('/servicos/categorias/all')
-  services.value = servicos
+  const { data: oportunidades } = await api.get('/empregooportunidade/all')
+  const { data: categoriasApi } = await api.get('/empregocategoria/all')
+  empregos.value = oportunidades
   categorias.value = categoriasApi
   loading.value = false
 })
@@ -37,11 +37,11 @@ watch([searchResults, categoriaAtiva], () => {
 const filtered = computed(() => {
   let base = searchResults.value.length
     ? searchResults.value
-    : services.value
+    : empregos.value
 
   if (categoriaAtiva.value) {
     base = base.filter(
-      s => s?.CategoriaServico?.id === categoriaAtiva.value
+      s => s?.EmpregoCategorium?.ID === categoriaAtiva.value
     )
   }
 
@@ -49,26 +49,27 @@ const filtered = computed(() => {
 })
 
 const regulares = computed(() =>
-  filtered.value.filter(s => !s.desabrigado)
+  filtered.value.filter(s => !s.Desabrigado)
 )
 
 const cadarca = computed(() =>
-  filtered.value.filter(s => s.desabrigado)
+  filtered.value.filter(s => s.Desabrigado)
 )
 </script>
 
-
 <template>
-    <TheHeader class="mb-15"></TheHeader>
-  <div class="ui-container-xl px-6 sm:px-12 lg:px-28 space-y-10 mb-25">
-    <h1 class="text-heading font-text text-4xl sm:text-5xl font-bold">Serviços</h1>
-    <SearchBar
-      :items="services"
-      searchKey="nome"
-      @results="searchResults = $event"
-    />
+    <TheHeader class="mb-15"/>
 
-    <div class="flex flex-col lg:flex-row-reverse gap-10 lg:gap-6">
+    <main class="ui-container-xl px-6 sm:px-12 lg:px-28 space-y-10 mb-25">
+      <h1 class="text-heading font-text text-4xl sm:text-5xl font-bold">Empregos</h1>
+
+      <SearchBar
+        :items="empregos"
+        searchKey="Titulo"
+        @results="searchResults = $event"
+      />
+
+      <div class="flex flex-col lg:flex-row-reverse gap-10 lg:gap-6">
         <CategoriaFiltro class="h-full"
           :categorias="categorias"
           :activeCategoria="categoriaAtiva"
@@ -79,11 +80,11 @@ const cadarca = computed(() =>
     
             <section>
                 <h2 class="text-3xl font-title mb-6 text-heading font-bold text-center sm:text-left">
-                    Serviços Regulares
+                    Vagas para Ususários Regulares
                 </h2>
     
-                <ServiceSection v-if="!loading"
-                    :services="regulares"
+                <EmpregoSection v-if="!loading"
+                    :empregos="regulares"
                     :perPage="PER_PAGE"
                     :page="pageRegulares"
                     @page-change="pageRegulares = $event"
@@ -96,11 +97,11 @@ const cadarca = computed(() =>
     
             <section>
                 <h2 class="text-3xl font-title mb-6 text-heading font-bold text-center sm:text-left">
-                    Serviços CadARCA
+                    Vagas para Usuários CadARCA
                 </h2>
     
-                <ServiceSection v-if="!loading && cadarca.length"
-                    :services="cadarca"
+                <EmpregoSection v-if="!loading && cadarca.length"
+                    :empregos="cadarca"
                     :perPage="PER_PAGE"
                     :page="pageCadarca"
                     @page-change="pageCadarca = $event"
@@ -112,6 +113,7 @@ const cadarca = computed(() =>
     
           </div>
     </div>
-  </div>
-  <TheFooter/>
+    </main>
+
+    <TheFooter class="mb-15"/>
 </template>

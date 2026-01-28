@@ -14,10 +14,12 @@ const routes = [
   { path: '/confirmacao', component: () => import('../pages/Confirmacao.vue'), name: 'confirmacao' },
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
-
-  { path: '/dados-pessoais', meta: { requiresAuth: true }, component: () => import('../pages/DadosPessoais.vue')
-  }]
-
+  { path: '/vagas', component: () => import('../pages/Empregos.vue') },
+  { path: '/vagas/:id', component: () => import('../pages/Emprego.vue'), props: true },
+  { path: '/perfil/dados', component: () => import('../pages/DadosPessoais.vue'), meta: { requiresAuth: true } },
+  { path: '/login-obrigatorio', component: () => import('../pages/LoginObrigatorio.vue') },
+  { path: '/denuncias', component: () => import('../pages/Denuncias.vue'),  meta: { requiresAuth: true } }
+]
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,7 +29,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isAuthenticated)
-    return '/login/comum'
+    return '/login-obrigatorio'
 })
 
 export default router

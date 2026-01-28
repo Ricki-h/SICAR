@@ -1,10 +1,10 @@
 <script setup>
 import { computed } from 'vue'
 import Pagination from '../Pagination.vue'
-import ServiceCard from './ServiceCard.vue'
+import EmpregoCard from './EmpregoCard.vue'
 
 const props = defineProps({
-  services: {
+  empregos: {
     type: Array,
     default: () => []
   },
@@ -26,23 +26,18 @@ const paginated = computed(() => {
 })
 </script>
 
-
 <template>
-  <div class="flex flex-col gap-5">
-    <div class="flex flex-wrap gap-2 sm:justify-between justify-center">
-      <ServiceCard
-        v-for="service in paginated"
-        :key="service.id"
-        :service="service"
-      />
+    <div class="flex flex-col gap-5">
+        <div class="flex flex-wrap gap-2 sm:justify-evenly justify-center">
+            <EmpregoCard v-for="emprego in props.empregos" :key="emprego.id" :oportunidade="emprego"></EmpregoCard>
+        </div>
     </div>
 
     <Pagination
-      v-if="services.length > perPage"
-      :items="services"
+      v-if="empregos.length > perPage"
+      :items="empregos"
       :currentPage="page"
       :perPage="perPage"
       @page-change="emit('page-change', $event)" class="flex w-full items-center justify-center"
     />
-  </div>
 </template>

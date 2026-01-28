@@ -4,7 +4,7 @@ import api from '../services/api';
 
 const cats = ref([])
 onMounted(async() => {
-    const { data } = await api.get('http://localhost:3000/empregocategoria/all')
+    const { data } = await api.get('/empregocategoria/all')
     cats.value = data
 })
 </script>

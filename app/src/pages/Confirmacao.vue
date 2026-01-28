@@ -28,7 +28,7 @@ onMounted(() => {
 
 <template>
   <main class="min-h-screen flex items-center justify-center bg-bg">
-    <div class="bg-white rounded-xl shadow-md p-10 text-center max-w-md w-full space-y-4">
+    <div class="bg-bg-blue rounded-xl shadow-md p-10 text-center max-w-md w-full space-y-4">
 
       <div class="text-blue-500 text-5xl">✔</div>
 
