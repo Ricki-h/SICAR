@@ -8,13 +8,15 @@ import Saude from '../assets/icons/Health.png';
 import Documentos from '../assets/icons/Documentos.png';
 import Acolhimento from '../assets/icons/Acolhimento.png';
 import Comprimido from '../assets/icons/Comprimido.png';
-import Uniao from '../assets/icons/Acolhimento-img.png'
+import Uniao from '../assets/icons/Acolhimento-img.png';
+import Cartao from '../assets/icons/Rectangle25.png';
+import ImgDoc from '../assets/icons/Documento.png'
 
 const cards = [
   {
     title: 'Acesso',
     icon: Acesso,
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&q=80&w=400',
+    image: Cartao,
     description: 'Consulte sua situação, atualize seus dados e emita seu comprovante no sistema.'
   },
   {
@@ -26,7 +28,7 @@ const cards = [
   {
     title: 'Documentos',
     icon: Documentos,
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=400',
+    image: ImgDoc,
     description: 'Tire ou recupere seus documentos para acessar seus direitos.'
   },
   {

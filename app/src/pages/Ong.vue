@@ -13,8 +13,8 @@ const handlePageChange = (page) => {
 }
 
 const listaDeOngs = ref([
-  { id: 1, titulo: 'Arboriza', meta: 3000, arrecadado: 2000, descricao: 'A Arboriza é uma ONG dedicada a combater a escassez de áreas verdes em ambientes urbanos com baixa cobertura arbórea, plantando diversas espécies nativas e adaptadas para revitalizar cidades mais sustentáveis.' },
-  { id: 2, titulo: ' Instituto Capim Santo', meta: 5000, arrecadado: 2355, descricao: 'Oferece cursos grátis de gastronomia social para vulneráveis, combatendo fome e gerando renda com foco em identidade brasileira.' },
+  { id: 1, titulo: 'Chuveiro Solidário', meta: 3000, arrecadado: 2000, descricao: 'O projeto Chuveiro Solidário atua em Natal promovendo banho, dignidade e acolhimento a moradores de rua. É disponibilizado roupas, kits de higiene e alimentos para os moradores de rua que fazem parte da ação, garantindo que se sintam acolhidos e apoiados pelo projeto. Nas suas ações, também disponibilizam cortes de cabelo e outros serviços.' },
+  { id: 2, titulo: 'Cuscuz do Celsinho', meta: 5000, arrecadado: 2355, descricao: 'O "Cuscuz do Celsinho" nasceu do desejo de uma mãe de ressignificar a memória do seu falecido filho através do seu prato favorito: o cuscuz. O projeto atende moradores de rua em Natal levando alimento e esperança.' },
   { id: 3, titulo: 'Fundação Educar', meta: 7000, arrecadado: 470, descricao: 'Distribui milhões de livros infantis pra ONGs e escolas, promovendo leitura em comunidades vulneráveis pelo Brasil.' },
   { id: 4, titulo: 'Aspoan', meta: 500, arrecadado: 90, descricao: 'A ONG começou com 48 pessoas, no ano de 1985, convergindo vários interesses, principalmente a defesa do meio ambiento e um desenvolvimento em tecnologia voltada para agricultura alternativa. Atualmente a ONG trabalha a favor de questões socioambientais, prevendo promover projetos que melhorem a qualidade de vida da cidade de Natal, começando pela Praia de Ponta Negra, onde mora Francisco Iglesias, um dos fundadores da Aspoan.' },
   { id: 5, titulo: 'Social Construction', meta: 8000, arrecadado: 8973, descricao: 'A Social Construction é uma ONG que promove a capacitação profissional gratuita em construção civil para jovens e mulheres de comunidades vulneráveis, oferecendo cursos práticos de alvenaria, elétrica residencial, hidráulica e acabamentos.' },
@@ -22,6 +22,7 @@ const listaDeOngs = ref([
   { id: 7, titulo: 'Guerreiros Pet', meta: 1200, arrecadado: 100, descricao: 'Com trabalhos voltados em prol da causa animal, a organização abriga, realiza resgates e atendimentos veterinários de animais abandonados.' },
   { id: 8, titulo: 'Lar Anália Franco', meta: 6200, arrecadado: 4253, descricao: 'Certificado como Entidade Beneficente de Assistência Social e integrante da Rede PEA – UNESCO, a organização realiza projetos voltados ao apoio pedagógico, atividades esportivas e de lazer, iniciativas voltadas para a arte e cultura, suplementação alimentar, preparação para a inserção no mercado de trabalho e capacitação para a geração de renda familiar.' },
   { id: 9, titulo: 'Projeto Recriando Raízes', meta: 4800, arrecadado: 100, descricao: 'A organização atua no Rio de Janeiro levando educação e capacitação para crianças, jovens e adultos em situação de vulnerabilidade socioeconômica. Seu impacto já resultou em mais de 1 mil jovens formados, mais de 1,8 mil crianças assistidas e mais de 5 mil famílias beneficiadas por cestas básicas.' },
+  { id: 10 }
   
 ])
 
