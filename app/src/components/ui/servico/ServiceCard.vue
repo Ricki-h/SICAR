@@ -12,7 +12,7 @@ const { id, nome, desabrigado, descricaoCurta, CategoriaServico } = props.servic
 </script>
 
 <template>
-    <div class="bg-[#FAFAFA] shadow-md max-w-full sm:max-w-66 flex flex-col gap-5 lg:max-w-70 hover:shadow-lg hover:scale-102 p-6 transition-all w-full duration-500 hover:border border-orange-600 rounded-lg justify-between">
+    <div class="bg-[#FAFAFA] shadow-md sm:max-w-66 flex flex-col gap-5 lg:max-w-70 hover:shadow-lg hover:scale-102 p-6 transition-all w-full duration-500 hover:border border-orange-600 rounded-lg justify-between">
         <div class="flex gap-4">
             <img :src="CategoriaServico.icon" :alt="CategoriaServico.nome">
             <h3 class="text-xl text-[#142457] font-semibold font-title flex-none">{{ CategoriaServico.nome }}</h3>

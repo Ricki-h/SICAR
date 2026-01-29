@@ -47,7 +47,6 @@ const submit = async () => {
   const cadarcaNumeros = onlyNumbers(cadarca.value)
 
   if (!cadarcaNumeros) cadarcaError.value = 'cadarca é obrigatório'
-  else if (!cadarcaValido(cadarcaNumeros)) cadarcaError.value = 'cadarca inválido'
 
   if (!nome.value) nomeError.value = 'Nome completo é obrigatório'
   if (!nascimento.value) nascimentoError.value = 'Data de nascimento é obrigatória'
@@ -76,7 +75,7 @@ const submit = async () => {
         nome: nome.value,
         data_nasc: nascimento.value,
         senha: senha.value,
-        tipo: 'comum'
+        tipo: 'cadArca'
     })
 
     router.push({ name: 'confirmacao', query: { type: 'cadastro' } })
@@ -623,7 +622,7 @@ const submit = async () => {
                     <div>
                         <label class="block text-sm mb-1 text-title font-bold font-title">CadARCA <span class="text-orange-600">*</span></label>
                         <input
-                        v-model="cadarca"
+                        v-model="cadarca" required="true"
                         type="text" placeholder="00000000000"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
@@ -634,7 +633,7 @@ const submit = async () => {
                     <div>
                         <label class="block text-sm mb-1 text-title font-bold font-title">Nome Completo <span class="text-orange-600">*</span></label>
                         <input
-                        v-model="nome"
+                        v-model="nome" required="true"
                         type="text" placeholder="Nome Completo"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
@@ -646,8 +645,8 @@ const submit = async () => {
                         <label class="block text-sm mb-1 text-title font-bold font-title ">Data de nascimeto <span class="text-orange-600">*</span></label>
                         <input
                         v-model="nascimento"
-                        type="date"
-                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
+                        type="date" required="true"
+                        class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600 [&::-webkit-calendar-picker-indicator]:invert"
                         />
                         <p v-if="nomeError" class="text-xs text-red-600 mt-1">
                             {{ nascimentoError }}
@@ -657,7 +656,7 @@ const submit = async () => {
                     <div class="relative">
                         <label class="block text-sm mb-1 text-title font-bold font-title">Senha <span class="text-orange-600">*</span></label>
                         <input
-                        v-model="senha"
+                        v-model="senha" required="true"
                         :type="showPassword ? 'text' : 'password'" placeholder="Cire sua senha"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
@@ -667,7 +666,7 @@ const submit = async () => {
                     </div>
                     <div class="relative">
                         <input
-                        v-model="confirmarSenha"
+                        v-model="confirmarSenha" required="true"
                         :type="showPassword ? 'text' : 'password'"
                         placeholder="Confirme sua senha"
                         class="w-full px-4 py-2 pr-12 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600 bg-bg"

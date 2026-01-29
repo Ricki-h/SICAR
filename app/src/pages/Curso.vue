@@ -6,6 +6,7 @@ import api from '../services/api'
 import BaseButton from '../components/ui/BaseButton.vue'
 import Loading from '../components/ui/Loading.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 
 const router = useRouter()
 const route = useRoute()
@@ -21,6 +22,27 @@ const loadCurso = async () => {
     curso.value = data
   } catch (error) {
     router.replace('/404')
+  }
+}
+
+const open = ref(false)
+const inscrever = async () => {
+  try {
+    if (!curso.value?.id) {
+      console.warn('Auxílio ainda não carregado')
+      return
+    }
+
+    await api.post('/cursos/inscrever', {
+      curso_id: curso.value.id
+    })
+
+    open.value = true
+    setTimeout(() => open.value = false, 2000)
+
+  } catch (error) {
+    console.error('Erro ao se inscrever no curso:', error)
+    router.replace('/login-obrigatorio')
   }
 }
 
@@ -41,7 +63,7 @@ onMounted(loadCurso)
                             <p class="text-blue-300 font-medium lg:text-lg">{{ curso.subtitulo }}</p>
                             <p class="text-[#c5d5e0] text-sm lg:text-base"><b>Desenvolvido por: </b>{{ curso.desenvolvedor }}</p>
                         </div>
-                        <BaseButton color="orange" class="w-full lg:w-50">Inscrever-se</BaseButton>
+                        <BaseButton @click="inscrever" color="orange" class="w-full lg:w-50">Inscrever-se</BaseButton>
                     </div>
                     <div class="w-full lg:max-w-122">
                         <img :src="curso.foto" alt="" class="w-full">
@@ -117,8 +139,14 @@ onMounted(loadCurso)
             </div>
         </div>
     </main>
-    <div v-else class="flex w-full py-10 items-center justify-center">
+    <div v-else class="flex w-full py-20 items-center justify-center">
         <Loading/>
+    </div>
+    <div v-if="open" class="bg-black/50 w-full min-h-full fixed top-0 flex justify-center items-center">
+        <div class="p-6 max-w-90 h-60 w-full bg-bg-blue text-center flex justify-center items-center rounded-lg flex-col gap-6">
+            <h4 class="text-4xl">✔</h4>
+            <h4 class="font-bold text-orange-600 text-2xl">{{ `${curso.titulo} Inscrito(a) com sucesso!` }}</h4>
+        </div>
     </div>
 
     <TheFooter/>

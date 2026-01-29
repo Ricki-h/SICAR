@@ -104,12 +104,12 @@
 
             <div class="flex flex-col gap-2">
                 <label class="font-bold text-title">Descrição</label>
-                <textarea required v-model="form.descricao" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Digite a descrição da denúncia" />
+                <textarea required v-model="form.descricao" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="Digite a descrição da denúncia"/>
             </div>
 
             <div class="flex flex-col gap-2">
                 <label class="font-bold text-title">Data</label>
-                <input required type="date" v-model="form.data" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm" placeholder="dd / mm / yyyy" />
+                <input required type="date" v-model="form.data" class="border-clarinho bg-bg text-text placeholder:text-clarinho focus:outline-orange-600 px-4 py-3 rounded-md text-sm [&::-webkit-calendar-picker-indicator]:invert" placeholder="dd / mm / yyyy" />
             </div>
             
             <div class="flex flex-col gap-2 sm:order-2">

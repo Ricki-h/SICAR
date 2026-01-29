@@ -74,6 +74,7 @@
 
       <ul class=" text-sm">
         <li class="hover:bg-bg-blue p-2"><BaseLink to="/perfil/dados" color="text" class="flex items-center gap-2">Dados pessoais</BaseLink></li>
+        <li class="hover:bg-bg-blue p-2" v-if="auth.user.tipo === 'cadArca'"><BaseLink to="/area-cadarca" color="text" class="flex items-center gap-2">Área CadARCA</BaseLink></li>
         <li class="hover:bg-bg-blue p-2"><BaseLink color="text" class="flex items-center gap-2">Segurança da conta</BaseLink></li>
         <li class="hover:bg-bg-blue p-2"><BaseLink color="text" class="flex items-center gap-2">Suporte</BaseLink></li>
         <li class="hover:bg-bg-blue p-2 hover:cursor-pointer"><button @click="auth.logout()" class="flex items-center gap-2 font-text text-red-500 font-medium hover:cursor-pointer">Sair</button></li>

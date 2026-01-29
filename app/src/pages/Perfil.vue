@@ -67,9 +67,9 @@ onMounted(async () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="17" viewBox="0 0 22 17" fill="currentColor" class="fill-title">
                     <path d="M14 0V2H12V3.05C17.053 3.551 21 7.815 21 13H1C1 7.815 4.947 3.551 10 3.05V2H8V0H14ZM22 17V15H0V17H22Z"/>
                   </svg>
-                  <h5 class="font-text font-bold text-title">Minhas denúncias</h5>
+                  <h5 class="font-text font-bold text-title">Serviços solicitados</h5>
                 </div>
-                <p class="text-sm text-text font-text">Acessar denúncias feitas</p>
+                <p class="text-sm text-text font-text">Acompanhar status dos agendamentos</p>
               </div>
             </div>
           </div>

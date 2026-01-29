@@ -585,7 +585,7 @@
                     <div>
                         <label class="block text-sm mb-1 text-title font-bold font-title">CadARCA <span class="text-orange-600">*</span></label>
                         <input
-                        v-model="cadarca"
+                        v-model="cadarca" required="true"
                         type="text" placeholder="00000000000"
                         class="w-full px-4 py-2 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600"
                         />
@@ -593,7 +593,7 @@
         
                     <div class="relative">
                         <input
-                        v-model="senha"
+                        v-model="senha" required="true"
                         :type="showPassword ? 'text' : 'password'"
                         placeholder="Digite sua senha"
                         class="w-full px-4 py-2 pr-12 rounded-lg border border-clarinho text-text placeholder:text-clarinho focus:outline-orange-600 bg-bg"

@@ -8,6 +8,7 @@ import Badge from '../components/ui/Badge.vue'
 import BaseButton from '../components/ui/BaseButton.vue'
 import Loading from '../components/ui/Loading.vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 
 const router = useRouter()
 const route = useRoute()
@@ -23,6 +24,27 @@ const loadService = async () => {
     service.value = data
   } catch (error) {
     router.replace('/404')
+  }
+}
+
+const open = ref(false)
+const agendar = async () => {
+  try {
+    if (!service.value?.id) {
+      console.warn('Serviço ainda não carregado')
+      return
+    }
+
+    await api.post('/servicos/agendamentos/agendar', {
+      servico_id: service.value.id
+    })
+
+    open.value = true
+    setTimeout(() => open.value = false, 2000)
+
+  } catch (error) {
+    console.error('Erro ao agendar serviço:', error)
+    router.replace('/login-obrigatorio')
   }
 }
 
@@ -45,7 +67,7 @@ onMounted(loadService)
                 <h2 class="font-title font-bold text-2xl sm:text-3xl text-title mt-2">{{ service.nome }}</h2>
             </div>
 
-            <BaseButton color="neutral" class="max-w-50 w-full">Realizar Serviço</BaseButton>
+            <BaseButton @click="agendar" color="neutral" class="max-w-50 w-full">Realizar Serviço</BaseButton>
 
             <hr class="border-clarinho w-full">
 
@@ -81,6 +103,12 @@ onMounted(loadService)
 
         </div>
     </main>
+    <div v-if="open" class="bg-black/50 w-full min-h-full fixed top-0 flex justify-center items-center">
+        <div class="p-6 max-w-90 h-60 w-full bg-bg-blue text-center flex justify-center items-center rounded-lg flex-col gap-6">
+            <h4 class="text-4xl">✔</h4>
+            <h4 class="font-bold text-orange-600 text-2xl">{{ `${service.nome} Agendado com sucesso!` }}</h4>
+        </div>
+    </div>
 
     <TheFooter/>
 </template>

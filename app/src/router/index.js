@@ -6,11 +6,10 @@ const routes = [
     path: '/',
     component: () => import('../pages/Home.vue')
   },
-  { path: '/sobre', component: () => import('../pages/Sobre.vue') },
-  { path: '/login/comum', component: () => import('../pages/LoginComum.vue') },
-  { path: '/login/cadarca', component: () => import('../pages/LoginCadarca.vue') },
-  { path: '/cadastro/comum', component: () => import('../pages/CadastroComum.vue') },
-  { path: '/cadastro/cadarca', component: () => import('../pages/CadastroCadarca.vue') },
+  { path: '/login/comum', component: () => import('../pages/LoginComum.vue'), meta: { guestOnly: true } },
+  { path: '/login/cadarca', component: () => import('../pages/LoginCadarca.vue'), meta: { guestOnly: true } },
+  { path: '/cadastro/comum', component: () => import('../pages/CadastroComum.vue'), meta: { guestOnly: true } },
+  { path: '/cadastro/cadarca', component: () => import('../pages/CadastroCadarca.vue'), meta: { guestOnly: true } },
   { path: '/confirmacao', component: () => import('../pages/Confirmacao.vue'), name: 'confirmacao' },
   { path: '/services', component: () => import('../pages/Services.vue') },
   { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
@@ -38,6 +37,11 @@ router.beforeEach((to) => {
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isAuthenticated)
     return '/login-obrigatorio'
+
+  if (to.meta.guestOnly && auth.isAuthenticated) {
+    next('/')
+    return '/'
+  }
 })
 
 export default router

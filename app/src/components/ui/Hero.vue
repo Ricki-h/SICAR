@@ -1,5 +1,7 @@
 <script setup>
+import { useAuthStore } from '../../stores/auth';
 import BaseButton from './BaseButton.vue';
+const auth = useAuthStore()
 </script>
 
 <template>
@@ -14,11 +16,11 @@ import BaseButton from './BaseButton.vue';
 
             <div class="max-w-30 flex flex-col gap-3 sm:hidden">
                 <BaseButton color="blue" size="sm" class="w-full" to="/sobre">SOBRE NÓS</BaseButton>
-                <BaseButton color="neutral" size="sm" class="w-full">CADASTRE-SE</BaseButton>
+                <BaseButton v-if="!auth.isAuthenticated" color="neutral" size="sm" class="w-full">CADASTRE-SE</BaseButton>
             </div>
             <div class="w-96 sm:flex gap-3 hidden">
                 <BaseButton color="blue" class="w-full" to="/sobre">SOBRE NÓS</BaseButton>
-                <BaseButton color="neutral" class="w-full" to="/cadastro/comum">CADASTRE-SE</BaseButton>
+                <BaseButton v-if="!auth.isAuthenticated" color="neutral" class="w-full" to="/cadastro/comum">CADASTRE-SE</BaseButton>
             </div>
         </div>
     </div>

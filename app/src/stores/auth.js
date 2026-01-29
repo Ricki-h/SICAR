@@ -32,8 +32,8 @@ export const useAuthStore = defineStore('auth', {
         const { data } = await api.get('usuarios/me')
         this.user = data
       } catch (error) {
-        console.error('Erro ao buscar usuário:', error)
         this.logout()
+        console.error('Erro ao buscar usuário:', error)
       } finally {
         this.loading = false
       }

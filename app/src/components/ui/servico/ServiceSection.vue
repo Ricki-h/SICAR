@@ -29,7 +29,7 @@ const paginated = computed(() => {
 
 <template>
   <div class="flex flex-col gap-5">
-    <div class="flex flex-wrap gap-2 sm:justify-between justify-center">
+    <div class="flex flex-wrap gap-2 sm:justify-evenly justify-center">
       <ServiceCard
         v-for="service in paginated"
         :key="service.id"
