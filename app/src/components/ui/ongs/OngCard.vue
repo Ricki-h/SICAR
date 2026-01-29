@@ -15,7 +15,7 @@ const props = defineProps({
 <template>
     <div class="rounded-lg shadow-md overflow-hidden flex flex-col border border-clarinho">
       <div class="h-48 bg-gray-300 w-full overflow-clip">
-        <img src="/ONG.png" alt="" class="object-cover">
+        <img :src="ong.img ? ong.img : '/ONG.png'" alt="" class="object-cover">
       </div>
       
       <div class="p-5 flex flex-col gap-4">

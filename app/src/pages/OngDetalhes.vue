@@ -5,6 +5,8 @@ import TheFooter from '../components/ui/TheFooter.vue';
 import BaseLink from '../components/ui/BaseLink.vue';
 import { useRoute, useRouter } from 'vue-router';
 import BaseButton from '../components/ui/BaseButton.vue';
+import Ongcuscuz from '../assets/icons/Ongcuscuz.jpg';
+import Ongsolidario from '../assets/icons/Ongsolidario.jpg';
 
 
 const router = useRouter()
@@ -12,8 +14,8 @@ const route = useRoute()
 const id = Number(useRoute().params.id)
 
 const listaDeOngs = ref([
-  { id: 1, titulo: 'Chuveiro Solidário', meta: 3000, arrecadado: 2000, descricao: 'O projeto Chuveiro Solidário atua em Natal promovendo banho, dignidade e acolhimento a moradores de rua. É disponibilizado roupas, kits de higiene e alimentos para os moradores de rua que fazem parte da ação, garantindo que se sintam acolhidos e apoiados pelo projeto. Nas suas ações, também disponibilizam cortes de cabelo e outros serviços.' },
-  { id: 2, titulo: 'Cuscuz do Celsinho', meta: 5000, arrecadado: 2355, descricao: 'O "Cuscuz do Celsinho" nasceu do desejo de uma mãe de ressignificar a memória do seu falecido filho através do seu prato favorito: o cuscuz. O projeto atende moradores de rua em Natal levando alimento e esperança.' },
+  { id: 1, titulo: 'Chuveiro Solidário', meta: 3000, arrecadado: 2000, descricao: 'O projeto Chuveiro Solidário atua em Natal promovendo banho, dignidade e acolhimento a moradores de rua. É disponibilizado roupas, kits de higiene e alimentos para os moradores de rua que fazem parte da ação, garantindo que se sintam acolhidos e apoiados pelo projeto. Nas suas ações, também disponibilizam cortes de cabelo e outros serviços.', img: Ongsolidario },
+  { id: 2, titulo: 'Cuscuz do Celsinho', meta: 5000, arrecadado: 2355, descricao: 'O "Cuscuz do Celsinho" nasceu do desejo de uma mãe de ressignificar a memória do seu falecido filho através do seu prato favorito: o cuscuz. O projeto atende moradores de rua em Natal levando alimento e esperança.', img: Ongcuscuz },
   { id: 3, titulo: 'Fundação Educar', meta: 7000, arrecadado: 470, descricao: 'Distribui milhões de livros infantis pra ONGs e escolas, promovendo leitura em comunidades vulneráveis pelo Brasil.' },
   { id: 4, titulo: 'Aspoan', meta: 500, arrecadado: 90, descricao: 'A ONG começou com 48 pessoas, no ano de 1985, convergindo vários interesses, principalmente a defesa do meio ambiento e um desenvolvimento em tecnologia voltada para agricultura alternativa. Atualmente a ONG trabalha a favor de questões socioambientais, prevendo promover projetos que melhorem a qualidade de vida da cidade de Natal, começando pela Praia de Ponta Negra, onde mora Francisco Iglesias, um dos fundadores da Aspoan.' },
   { id: 5, titulo: 'Social Construction', meta: 8000, arrecadado: 8973, descricao: 'A Social Construction é uma ONG que promove a capacitação profissional gratuita em construção civil para jovens e mulheres de comunidades vulneráveis, oferecendo cursos práticos de alvenaria, elétrica residencial, hidráulica e acabamentos.' },
@@ -69,7 +71,7 @@ const copyLink = async() => {
       <div class="lg:col-span-6">
         
         <div class="w-full aspect-video bg-[#c4c4c4] rounded-sm mb-8 overflow-clip">
-          <img src="/ONG.png" alt="" class="object-cover w-full">
+          <img :src="ongEspecifica.img ? ongEspecifica.img : '/ONG.png'" alt="" class="object-cover w-full">
         </div>
         
         
