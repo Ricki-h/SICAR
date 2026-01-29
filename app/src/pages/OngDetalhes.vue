@@ -3,10 +3,12 @@ import { onMounted, ref } from 'vue';
 import TheHeader from '../components/ui/TheHeader.vue';
 import TheFooter from '../components/ui/TheFooter.vue';
 import BaseLink from '../components/ui/BaseLink.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import BaseButton from '../components/ui/BaseButton.vue';
 
 
+const router = useRouter()
+const route = useRoute()
 const id = Number(useRoute().params.id)
 
 const listaDeOngs = ref([
@@ -25,9 +27,16 @@ const listaDeOngs = ref([
 const ongEspecifica = ref(null)
 
 const acharOng = () => {
-  ongEspecifica.value = listaDeOngs.value.find(
-    ong => ong.id === id
-  )
+  try {
+    ongEspecifica.value = listaDeOngs.value.find(
+      ong => ong.id === id
+    )
+    if(!ongEspecifica) {
+      router.replace('/404')
+    }
+  } catch(error) {
+    router.replace('/404')
+  }
 }
 
 const activeTab = ref('sobre');
@@ -82,7 +91,7 @@ const copyLink = async() => {
         </div>
 
         
-        <div v-if="activeTab === 'sobre'" class="text-text text-lg space-y-6">
+        <div v-if="activeTab === 'sobre'" class="text-text text-lg space-y-6 leading-7">
           <p>
             {{ ongEspecifica.descricao }}
           </p>

@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import TheHeader from '../components/ui/TheHeader.vue'
 import TheFooter from '../components/ui/TheFooter.vue'
 import SearchBar from '../components/ui/SearchBar.vue'
@@ -8,16 +7,22 @@ import api from '../services/api'
 import Badge from '../components/ui/Badge.vue'
 import BaseButton from '../components/ui/BaseButton.vue'
 import Loading from '../components/ui/Loading.vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
 const route = useRoute()
 const service = ref(null)
 
 const loadService = async () => {
   try {
     const { data } = await api.get(`/servicos/${route.params.id}`)
+    if (!data || !data.id) {
+      router.replace('/404')
+      return
+    }
     service.value = data
   } catch (error) {
-    console.error('Erro ao buscar serviço:', error)
+    router.replace('/404')
   }
 }
 
@@ -47,25 +52,25 @@ onMounted(loadService)
             <div>
                 <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
                     <div class="collapse-title sm:text-xl text-base text-title font-semibold">O que é esse serviço</div>
-                    <div class="collapse-content text-text text-sm sm:text-base">
+                    <div class="collapse-content text-text text-sm sm:text-base leading-7">
                         {{ service.descrição }}
                     </div>
                 </div>
                 <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
                     <div class="collapse-title sm:text-xl text-base text-title font-semibold">Quem pode utilizar esse serviço</div>
-                    <div class="collapse-content text-text text-sm sm:text-base">
+                    <div class="collapse-content text-text text-sm sm:text-base leading-7">
                         {{ service.publico }}
                     </div>
                 </div>
                 <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
-                    <div class="collapse-title sm:text-xl text-base text-title font-semibold">Etapas de realização</div>
+                    <div class="collapse-title sm:text-xl text-base text-title font-semibold leading-7">Etapas de realização</div>
                     <div class="collapse-content text-text text-sm sm:text-base">
                         {{ service.etapas }}
                     </div>
                 </div>
                 <div tabindex="0" class="collapse collapse-plus bg-bg font-text">
                     <div class="collapse-title sm:text-xl text-base text-title font-semibold">Outras informações</div>
-                    <div class="collapse-content text-text text-sm sm:text-base">
+                    <div class="collapse-content text-text text-sm sm:text-base leading-7">
                         {{ service.infoExtra }}
                     </div>
                 </div>

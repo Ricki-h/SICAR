@@ -1,13 +1,14 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
 import TheHeader from '../components/ui/TheHeader.vue'
 import TheFooter from '../components/ui/TheFooter.vue'
 import SearchBar from '../components/ui/SearchBar.vue'
 import api from '../services/api'
 import BaseButton from '../components/ui/BaseButton.vue'
 import Loading from '../components/ui/Loading.vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
 const route = useRoute()
 const emprego = ref(null)
 
@@ -56,9 +57,13 @@ const publicadoHa = computed(() => {
 const loadEmprego = async () => {
   try {
     const { data } = await api.get(`/empregooportunidade/${route.params.id}`)
+    if (!data || !data.id) {
+      router.replace('/404')
+      return
+    }
     emprego.value = data
   } catch (error) {
-    console.error('Erro ao buscar serviço:', error)
+   router.replace('/404')
   }
 }
 
@@ -146,11 +151,11 @@ onMounted(async () => {
               <div class="flex flex-col gap-10 w-full">
                 <div class="font-text">
                   <h4 class="text-2xl font-bold text-title mb-4">Descrição da Vaga</h4>
-                  <p class="text-text pl-10 text-justify">{{ emprego.Descricao_Detalhada }}</p>
+                  <p class="text-text pl-10 text-justify leading-7">{{ emprego.Descricao_Detalhada }}</p>
                 </div>
                 <div class="font-text">
                   <h4 class="text-2xl font-bold text-title mb-4">Requisitos da Vaga</h4>
-                  <p class="text-text pl-10 text-justify">{{ emprego.Requisitos ? emprego.Requisitos : 'Essa vaga não tem requisitos' }}</p>
+                  <p class="text-text pl-10 text-justify leading-7">{{ emprego.Requisitos ? emprego.Requisitos : 'Essa vaga não tem requisitos' }}</p>
                 </div>
               </div>
               <div class="flex flex-col sm:flex-row flex-wrap sm:justify-between gap-10 w-full">

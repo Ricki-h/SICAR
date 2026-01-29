@@ -22,6 +22,11 @@ const routes = [
   { path: '/ongs', component: () => import('../pages/Ong.vue') },
   { path: '/ongs/:id', component: () => import('../pages/OngDetalhes.vue'), props: true },
   { path: '/auxilios', component: () => import('../pages/Auxilios.vue') },
+  { path: '/auxilios/:id', component: () => import('../pages/Auxilio.vue'), props: true },
+  { path: '/cursos', component: () => import('../pages/Cursos.vue') },
+  { path: '/cursos/:id', component: () => import('../pages/Curso.vue'), props: true },
+  { path: '/:pathMatch(.*)*', component: () => import('../pages/NotFound.vue'), name: 'NotFound' },
+  { path: '/denuncia', component: () => import('../pages/Denuncias.vue') },
 ]
 
 const router = createRouter({

@@ -54,7 +54,7 @@ const filtered = computed(() => {
             <section>
 
                 <AuxilioSection v-if="!loading"
-                    :auxilios="auxilios"
+                    :auxilios="filtered"
                     :perPage="PER_PAGE"
                     :page="page"
                     @page-change="page = $event"

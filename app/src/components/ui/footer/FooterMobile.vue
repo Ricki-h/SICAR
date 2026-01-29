@@ -32,7 +32,7 @@
                     <hr class="border-[#5D7893] w-full">
                     <div class="flex flex-col gap-1">
                         <BaseLink color="gray" size="xs" to="/vagas">Oportunidades de emprego</BaseLink>
-                        <BaseLink color="gray" size="xs">Catálogo de Cursos</BaseLink>
+                        <BaseLink color="gray" size="xs" to="/cursos">Catálogo de Cursos</BaseLink>
                     </div>
                 </div>
                 <div class="flex flex-col gap-4 w-35">
