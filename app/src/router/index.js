@@ -26,6 +26,7 @@ const routes = [
   { path: '/cursos/:id', component: () => import('../pages/Curso.vue'), props: true },
   { path: '/:pathMatch(.*)*', component: () => import('../pages/NotFound.vue'), name: 'NotFound' },
   { path: '/denuncia', component: () => import('../pages/Denuncias.vue') },
+  { path: '/area-cadarca', component: () => import('../pages/AreaCardArca.vue'), meta: { requiresAuth:true  } },
 ]
 
 const router = createRouter({
