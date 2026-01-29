@@ -1,0 +1,9 @@
+@layer utilities {
+  .font-title {
+    font-family: var(--font-title);
+  }
+
+  .font-text {
+    font-family: var(--font-text);
+  }
+}

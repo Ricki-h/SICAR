@@ -1,0 +1,48 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
+
+const routes = [
+  {
+    path: '/',
+    component: () => import('../pages/Home.vue')
+  },
+  { path: '/login/comum', component: () => import('../pages/LoginComum.vue'), meta: { guestOnly: true } },
+  { path: '/login/cadarca', component: () => import('../pages/LoginCadarca.vue'), meta: { guestOnly: true } },
+  { path: '/cadastro/comum', component: () => import('../pages/CadastroComum.vue'), meta: { guestOnly: true } },
+  { path: '/cadastro/cadarca', component: () => import('../pages/CadastroCadarca.vue'), meta: { guestOnly: true } },
+  { path: '/confirmacao', component: () => import('../pages/Confirmacao.vue'), name: 'confirmacao' },
+  { path: '/services', component: () => import('../pages/Services.vue') },
+  { path: '/servico/:id', component: () => import('../pages/Service.vue'), props: true },
+  { path: '/vagas', component: () => import('../pages/Empregos.vue') },
+  { path: '/vagas/:id', component: () => import('../pages/Emprego.vue'), props: true },
+  { path: '/perfil/dados', component: () => import('../pages/DadosPessoais.vue'), meta: { requiresAuth: true } },
+  { path: '/perfil', component: () => import('../pages/Perfil.vue'), meta: { requiresAuth: true } },
+  { path: '/login-obrigatorio', component: () => import('../pages/LoginObrigatorio.vue') },
+  { path: '/ongs', component: () => import('../pages/Ong.vue') },
+  { path: '/ongs/:id', component: () => import('../pages/OngDetalhes.vue'), props: true },
+  { path: '/auxilios', component: () => import('../pages/Auxilios.vue') },
+  { path: '/auxilios/:id', component: () => import('../pages/Auxilio.vue'), props: true },
+  { path: '/cursos', component: () => import('../pages/Cursos.vue') },
+  { path: '/cursos/:id', component: () => import('../pages/Curso.vue'), props: true },
+  { path: '/:pathMatch(.*)*', component: () => import('../pages/NotFound.vue'), name: 'NotFound' },
+  { path: '/denuncia', component: () => import('../pages/Denuncias.vue') },
+  { path: '/area-cadarca', component: () => import('../pages/AreaCardArca.vue'), meta: { requiresAuth:true  } },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isAuthenticated)
+    return '/login-obrigatorio'
+
+  if (to.meta.guestOnly && auth.isAuthenticated) {
+    next('/')
+    return '/'
+  }
+})
+
+export default router

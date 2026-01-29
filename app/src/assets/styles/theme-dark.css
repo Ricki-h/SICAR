@@ -1,0 +1,14 @@
+.dark {
+  --bg: 20 23 27;
+  --text: 147 169 190;
+  --title: 225 239 250;
+  --heading: 238 247 255;
+  --clarinho: 49 65 77;
+  --button: 246 251 255;
+  --btntext: 20 23 27;
+  --btnhover: 225 239 250;
+  --bgblue: 41 44 47;
+  --shadow: 0 6 12;
+  --bgbluehover: 24 27 29;
+  --blackblue: 27 99 245;
+}
