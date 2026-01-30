@@ -16,7 +16,6 @@ const categoriaAtiva = ref(null)
 const loading = ref(true)
 
 const pageRegulares = ref(1)
-const pageCadarca = ref(1)
 
 const PER_PAGE = 6
 
@@ -31,7 +30,6 @@ onMounted(async () => {
 
 watch([searchResults, categoriaAtiva], () => {
   pageRegulares.value = 1
-  pageCadarca.value = 1
 })
 
 const filtered = computed(() => {
@@ -50,10 +48,6 @@ const filtered = computed(() => {
 
 const regulares = computed(() =>
   filtered.value.filter(s => !s.Desabrigado)
-)
-
-const cadarca = computed(() =>
-  filtered.value.filter(s => s.Desabrigado)
 )
 </script>
 
@@ -93,22 +87,6 @@ const cadarca = computed(() =>
                   <Loading/>
                 </div>
 
-            </section>
-    
-            <section>
-                <h2 class="text-3xl font-title mb-6 text-heading font-bold text-center sm:text-left">
-                    Vagas para Usuários CadARCA
-                </h2>
-    
-                <EmpregoSection v-if="!loading && cadarca.length"
-                    :empregos="cadarca"
-                    :perPage="PER_PAGE"
-                    :page="pageCadarca"
-                    @page-change="pageCadarca = $event"
-                />
-                <div v-else-if="loading" class="flex w-full justify-center items-center">
-                  <Loading/>
-                </div>
             </section>
     
           </div>
