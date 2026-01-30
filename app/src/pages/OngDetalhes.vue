@@ -111,7 +111,7 @@ const copyLink = async() => {
         <div class="p-0 sm:p-6 shadow-sm">
           <p class="text-xs font-medium
            text-text mb-1">2 Apoiadores</p>
-          <h2 class="text-heading text-xl font-bold mb-6">Titulo muito legal e massa</h2>
+          <h2 class="text-heading text-xl font-bold mb-6"> {{ ongEspecifica.titulo }}</h2>
           
           
           <div class="w-full bg-[#cbd5e1] rounded-full h-3.5 mb-8">
